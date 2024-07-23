@@ -1,0 +1,55 @@
+/* Estilo section de las tareas */
+
+/* Contenedor de la tarea */
+.contenedor-tarea{
+  width: 550px;
+  min-height: 65px;
+  margin: 5px 0;
+  padding: 8px 15px 8px 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 100, 0, 0.8);
+  cursor: pointer;
+}
+
+/* Colores de fondo */
+.contenedor-tarea:nth-child(3n + 1){
+  background-color: rgba(0, 100, 0, 0.8);
+}
+.contenedor-tarea:nth-child(3n + 2){
+  background-color: rgba(0, 100, 0, 0.7);
+}
+.contenedor-tarea:nth-child(3n + 3){
+  background-color: rgba(0, 100, 0, 0.6 );
+}
+
+/* Texto */
+.tarea-texto{
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  text-align: justify;
+  overflow-wrap: anywhere;
+}
+
+.tarea-icono{
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
+}
+.tarea-icono:hover{
+  cursor: pointer;
+  transform: rotate(4deg);
+}
+
+/* Tarea completada */
+
+.contenedor-tarea.completada{
+  background-color: rgba(42, 42, 248, 0.9);
+  text-decoration: line-through;
+}

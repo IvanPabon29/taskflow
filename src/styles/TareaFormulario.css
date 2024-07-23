@@ -1,0 +1,38 @@
+/* Estilo al input de la tarea */
+
+.tarea-formulario{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+/* input */
+.tarea-input{
+  width: 350px;
+  font-size: 1rem;
+  background-color: whitesmoke;
+  padding: 15px 16px;
+  border-radius: 10px;
+  border: 2px solid darkgreen;
+  outline: none;
+}
+
+/* Boton */
+.tarea-boton{
+  padding: 15px;
+  font-size: 15px;
+  margin-left: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  background-color: darkgreen;
+  color: whitesmoke;
+  font-weight: bold;
+}
+.tarea-boton:hover{
+  background-color: whitesmoke;
+  color: darkgreen;
+  transition: .3s;
+}

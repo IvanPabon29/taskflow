@@ -1,0 +1,36 @@
+/* Generales */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  color: black;
+  background-color: darkseagreen;
+  font-family:'Courier New', Courier, monospace;
+}
+.App{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main lista de tareas */
+
+.main-lista{
+  width: 600px;
+  min-height: 500px;
+  background-color: wheat;
+  padding: 25px;
+  margin: 10px;
+  border-radius: 15px;
+  text-align: center;
+  border: 1px solid darkgreen;
+}
+.titulo{
+  font-size: 1.4rem;
+  margin: 8px;
+}
