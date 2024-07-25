@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/listas-tareas/static/css/main.fcad89fc.css",
+    "main.js": "/listas-tareas/static/js/main.52bf01f2.js",
+    "static/media/clear.png": "/listas-tareas/static/media/clear.4530d6bb2667938a9c9b.png",
+    "static/media/logo.png": "/listas-tareas/static/media/logo.12816fc1e5bc0b377565.png",
+    "index.html": "/listas-tareas/index.html",
+    "main.fcad89fc.css.map": "/listas-tareas/static/css/main.fcad89fc.css.map",
+    "main.52bf01f2.js.map": "/listas-tareas/static/js/main.52bf01f2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fcad89fc.css",
+    "static/js/main.52bf01f2.js"
+  ]
+}
