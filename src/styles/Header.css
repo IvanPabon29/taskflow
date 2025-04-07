@@ -1,0 +1,105 @@
+/* src/styles/Header.css */
+
+/* @import url("./Variables.css");  */
+
+.header {
+  background-color: var(--color-blanco);
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo .logo {
+  height: 50px; /* Ajusta según tu logo */
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.welcome-message {
+  font-size: 1rem;
+  color: var(--color-negro);
+}
+
+.user-menu {
+  position: relative;
+}
+
+.user-icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--color-negro);
+  padding: 5px;
+}
+
+/* Dropdown del menú de usuario */
+.dropdown-menu {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background-color: var(--color-blanco);
+  border: 1px solid var(--color-gris-claro);
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 100;
+  width: 150px;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu li {
+  border-bottom: 1px solid var(--color-gris-claro);
+}
+
+.dropdown-menu li:last-child {
+  border-bottom: none;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: var(--color-negro);
+  font-size: 0.95rem;
+}
+
+.dropdown-menu li a:hover {
+  background-color: var(--color-gris-claro);
+}
+
+/* Responsive para pantallas de hasta 768px */
+@media (max-width: 768px) {
+  .welcome-message {
+    font-size: 0.9rem;
+  }
+  .user-icon-button {
+    font-size: 1.3rem;
+  }
+}
+
+/* Responsive para pantallas de hasta 480px */
+@media (max-width: 480px) {
+  .header-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .welcome-message {
+    font-size: 0.85rem;
+  }
+}
