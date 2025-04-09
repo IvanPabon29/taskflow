@@ -2,13 +2,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Header.css";
+import IconUser from "../assets/icons/user.png";
+import Logo from "../assets/img/logo.png";
 
 const Header = () => {
-  // Obtener datos del usuario desde localStorage (asegúrate de que se almacenen correctamente)
+  // Obtener datos del usuario desde localStorage
   const storedUser = localStorage.getItem("userData");
   const userData = storedUser ? JSON.parse(storedUser) : null;
   const username = userData?.usuario || "Usuario";
 
+  // Estado para manejar el menú desplegable
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -28,21 +31,29 @@ const Header = () => {
     <header className="header">
       <div className="header-container">
         <div className="header-logo">
-          {/* Si tienes un logo, reemplaza la URL; de lo contrario, usa un texto */}
-          <Link to="/">
-            <img src="/logo192.png" alt="TaskFlow Logo" className="logo" />
+          <Link to="/listas-tareas/home">
+            <img
+              src={Logo}
+              alt="TaskFlow Logo"
+              title="TaskFlow"
+              className="logo"
+            />
           </Link>
         </div>
+
         <div className="header-right">
-          <span className="welcome-message">Bienvenido, {username}</span>
+          <span className="welcome-message">
+            Bienvenido, <strong>{username}</strong>
+          </span>
           <div className="user-menu" ref={menuRef}>
             <button
               className="user-icon-button"
               onClick={() => setMenuOpen((prev) => !prev)}
+              title="Menú de usuario"
             >
-              {/* Puedes usar Font Awesome, un SVG o un emoji */}
-              <i className="fas fa-user"></i>
+              <img src={IconUser} alt="Usuario" className="user-icon" />
             </button>
+
             {menuOpen && (
               <div className="dropdown-menu">
                 <ul>
