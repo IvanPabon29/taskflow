@@ -17,9 +17,9 @@ function App() {
           <Route path="/listas-tareas" element={<Registro />} />
 
           {/* Rutas protegidas o privadas que utilizan el Layout con Header y Footer */} 
-          <Route path="/" element={<RequireAuth><Layout /></RequireAuth>}>
+          <Route path="/listas-tareas" element={<RequireAuth><Layout /></RequireAuth>}>
             <Route path="home" element={<Home />} />
-            <Route path="about" element={<About />} />
+            <Route path="acerca-de" element={<About />} />
             
             {/* Ruta para manejar páginas no encontradas 404 dentro del Layout */}
             <Route path="*" element={<NotFound />} />
