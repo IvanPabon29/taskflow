@@ -16,8 +16,18 @@
 }
 
 /* Logo */
-.header-logo .logo {
-  height: auto; 
+.header-logo a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+}
+.logo{
+  height: auto;
+}
+.logo-name{
+  font-size: 1.2rem;
+  color: var(--color-negro);
 }
 
 /* Seccion derecha */
