@@ -31,13 +31,14 @@ const Header = () => {
     <header className="header">
       <div className="header-container">
         <div className="header-logo">
-          <Link to="/listas-tareas/home">
+          <Link to="/listas-tareas/home" title="Home">
             <img
               src={Logo}
               alt="TaskFlow Logo"
-              title="TaskFlow"
+              title="Home"
               className="logo"
             />
+            <h1 className="logo-name">TaskFlow</h1>
           </Link>
         </div>
 
@@ -58,13 +59,13 @@ const Header = () => {
               <div className="dropdown-menu">
                 <ul>
                   <li>
-                    <Link to="/mi-perfil">Mi Perfil</Link>
+                    <Link to="/listas-tareas/mi-perfil">Mi Perfil</Link>
                   </li>
                   <li>
-                    <Link to="/acerca-de">Acerca de</Link>
+                    <Link to="/listas-tareas/acerca-de">Acerca de</Link>
                   </li>
                   <li>
-                    <Link to="/logout">Cerrar sesión</Link>
+                    <Link to="/listas-tareas">Cerrar sesión</Link>
                   </li>
                 </ul>
               </div>
