@@ -1,11 +1,16 @@
 // src/components/Header.js
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Header.css";
 import IconUser from "../assets/icons/user.png";
+import IconMiPerfil from "../assets/icons/icon-usuario-perfil.png";
+import IconAcercaDe from "../assets/icons/icon-acerca-de.svg";
+import IconEliminarUsuario from "../assets/icons/icon-eliminar-usuario.png";
 import Logo from "../assets/img/logo.png";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   // Obtener datos del usuario desde localStorage
   const storedUser = localStorage.getItem("userData");
   const userData = storedUser ? JSON.parse(storedUser) : null;
@@ -14,6 +19,7 @@ const Header = () => {
   // Estado para manejar el menú desplegable
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const [showModal, setShowModal] = useState(false);
 
   // Cierra el menú al hacer clic fuera del mismo
   useEffect(() => {
@@ -26,6 +32,13 @@ const Header = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Elimina los datos del usuario y redirige
+  const handleDeleteUser = () => {
+    localStorage.removeItem("userData");
+    setShowModal(false);
+    navigate("/listas-tareas");
+  };
 
   return (
     <header className="header">
@@ -59,13 +72,25 @@ const Header = () => {
               <div className="dropdown-menu">
                 <ul>
                   <li>
-                    <Link to="/listas-tareas/mi-perfil">Mi Perfil</Link>
+                    <Link to="/listas-tareas/mi-perfil">
+                      <img src={IconMiPerfil} alt="Mi perfil" />
+                      Mi Perfil
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/listas-tareas/acerca-de">Acerca de</Link>
+                    <Link to="/listas-tareas/acerca-de">
+                      <img src={IconAcercaDe} alt="Acerca de" />
+                      Acerca de
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/listas-tareas">Cerrar sesión</Link>
+                    <button
+                      onClick={() => setShowModal(true)}
+                      className="dropdown-btn"
+                    >
+                      <img src={IconEliminarUsuario} alt="Eliminar usuario" />
+                      Eliminar Cuenta
+                    </button>
                   </li>
                 </ul>
               </div>
@@ -73,6 +98,24 @@ const Header = () => {
           </div>
         </div>
       </div>
+
+      {/* Modal de confirmación para eliminar cuenta */}
+      {showModal && (
+        <dialog open className="modal-confirm">
+          <div className="modal-content">
+            <h2>¿Eliminar cuenta?</h2>
+            <p>¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.</p>
+            <div className="modal-actions">
+              <button className="btn-cancel" onClick={() => setShowModal(false)}>
+                Cancelar
+              </button>
+              <button className="btn-delete" onClick={handleDeleteUser}>
+                Sí, eliminar
+              </button>
+            </div>
+          </div>
+        </dialog>
+      )}
     </header>
   );
 };
