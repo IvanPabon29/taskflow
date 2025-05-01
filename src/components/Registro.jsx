@@ -1,7 +1,8 @@
 // src/components/Registro.js
-import React, { useState } from 'react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
-import '../styles/Registro.css';
+import React, { useState } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useNavigate } from "react-router-dom";
+import "../styles/Registro.css";
 import logo from "../assets/img/logo.png";
 
 /**
@@ -9,12 +10,13 @@ import logo from "../assets/img/logo.png";
  * Permite que el usuario ingrese nombre, correo y nombre de usuario.
  * Además, informa que para usar la aplicación, todos los datos se almacenan en el localStorage (máximo 5MB).
  */
-const Registro = ({ onRegistroCompleto }) => {
-  const [userData, setUserData] = useLocalStorage('userData', null);
+const Registro = () => {
+  const navigate = useNavigate();  // Usamos useNavigate para redirigir al usuario
+  const [setUserData] = useLocalStorage("userData", null);
   const [formData, setFormData] = useState({
-    nombre: '',
-    correo: '',
-    usuario: '',
+    nombre: "",
+    correo: "",
+    usuario: "",
   });
 
   const handleChange = (e) => {
@@ -24,9 +26,10 @@ const Registro = ({ onRegistroCompleto }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí podrías agregar validaciones adicionales
+    // Guardamos los datos del usuario en localStorage
     setUserData(formData);
-    onRegistroCompleto();
+    // Redirigimos al usuario al Home después de registrarse
+    navigate("/listas-tareas/home");
   };
 
   return (
