@@ -1,0 +1,120 @@
+/* src/styles/CrearTablero.css */
+
+/* Contenedor principal */
+.crear-tablero {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: var(--color-blanco);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-radius: 12px;
+}
+
+/* Título */
+.crear-tablero h2 {
+  font-size: 1.8rem;
+  color: var(--color-negro);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Formulario */
+.crear-tablero-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Etiquetas */
+.crear-tablero-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  color: var(--color-negro);
+  font-size: 0.95rem;
+}
+
+/* Inputs y textarea */
+.crear-tablero-form input[type="text"],
+.crear-tablero-form textarea,
+.crear-tablero-form select {
+  padding: 10px;
+  border: 1px solid var(--color-gris-claro);
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: var(--color-blanco);
+  color: var(--color-negro);
+  transition: border-color 0.3s;
+}
+
+.crear-tablero-form input[type="text"]:focus,
+.crear-tablero-form textarea:focus,
+.crear-tablero-form select:focus {
+  border-color: var(--color-negro);
+  outline: none;
+}
+
+/* Campo de color */
+.crear-tablero-form input[type="color"] {
+  width: 60px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Boton de enviar */
+.crear-tablero-form button {
+  padding: 12px;
+  background-color: var(--color-verde);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.crear-tablero-form button:hover {
+  background-color: var(--color-gris-medio);
+}
+
+/* Responsive hasta 768px  */
+@media (max-width: 768px) {
+  .crear-tablero {
+    margin: 20px 16px;
+    padding: 16px;
+  }
+
+  .crear-tablero h2 {
+    font-size: 1.5rem;
+  }
+
+  .crear-tablero-form {
+    gap: 16px;
+  }
+}
+
+/* Responsive hasta 480px */
+@media (max-width: 480px) {
+  .crear-tablero h2 {
+    font-size: 1.3rem;
+  }
+
+  .crear-tablero-form label {
+    font-size: 0.9rem;
+  }
+
+  .crear-tablero-form input,
+  .crear-tablero-form textarea,
+  .crear-tablero-form select {
+    font-size: 0.95rem;
+  }
+
+  .crear-tablero-form button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+}
