@@ -7,7 +7,7 @@
 
 /* CSS Body */
 body{
-  background-color: whitesmoke;
+  background-color: var(--color-fondo);
 }
 
 /* Div principal */
