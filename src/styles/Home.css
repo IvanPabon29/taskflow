@@ -116,8 +116,8 @@
   color: var(--color-gris-oscuro);
 }
 
-/* Responsive hasta 720px */
-@media (max-width: 720px) {
+/* Responsive hasta 768px */
+@media (max-width: 768px) {
   .home-title {
     font-size: 1.6rem;
   }
