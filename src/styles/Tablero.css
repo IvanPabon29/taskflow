@@ -1,0 +1,79 @@
+/* src/styles/Tablero.css */
+
+/* Estilos base del tablero */
+.tablero {
+  width: 100%;
+  padding: 2rem;
+  min-height: 100vh;
+  background-color: var(--color-fondo);
+  color: var(--color-negro);
+}
+
+/* Header del tablero */
+.tablero-header {
+  background-color: var(--color-blanco);
+  padding: 1.5rem;
+  border-left: 6px solid var(--color-verde);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+}
+
+/* Titulo */
+.tablero-header h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Descripcion */
+.tablero-header p {
+  margin: 0.25rem 0;
+  color: var(--color-gris-medio);
+}
+
+.tablero-header .tipo {
+  font-weight: bold;
+  text-transform: capitalize;
+  color: var(--color-negro);
+}
+
+/* Cuerpo */
+.tablero-body {
+  background-color: var(--color-blanco);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  color: var(--color-gris-medio);
+  font-style: italic;
+}
+
+/* Responsivo para tablets */
+@media (max-width: 768px) {
+  .tablero-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .tablero-body {
+    padding: 1.5rem;
+  }
+}
+
+/* Responsivo para móviles */
+@media (max-width: 480px) {
+  .tablero {
+    padding: 1rem;
+  }
+
+  .tablero-header {
+    padding: 1rem;
+  }
+
+  .tablero-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .tablero-body {
+    padding: 1rem;
+  }
+}
