@@ -1,0 +1,63 @@
+/* src/styles/TaskCard.css */
+
+/* Estilos base para la tarjeta de tarea */
+.task-card {
+  background-color: var(--color-blanco);
+  border: 1px solid var(--color-gris-claro);
+  border-left: 4px solid var(--color-verde);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efecto Hover */
+.task-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Titulo */
+.task-card h4 {
+  margin: 0;
+  color: var(--color-negro);
+  font-size: 1.2rem;
+}
+
+/* Descripcion */
+.task-card p {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--color-gris-medio);
+}
+
+/* Responsive en 768px*/
+@media (max-width: 768px) {
+  .task-card {
+    padding: 0.9rem;
+  }
+
+  .task-card h4 {
+    font-size: 1.1rem;
+  }
+
+  .task-card p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsive en 480px */
+@media (max-width: 480px) {
+  .task-card {
+    padding: 0.8rem;
+  }
+
+  .task-card h4 {
+    font-size: 1rem;
+  }
+
+  .task-card p {
+    font-size: 0.85rem;
+  }
+}
