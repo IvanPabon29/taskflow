@@ -1,0 +1,115 @@
+/* src/styles/MisTableros.css */
+
+/* Estilos para la pagina MisTableros */
+
+/* Estilos principales */
+.mis-tableros {
+  padding: 2rem;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+  color: var(--color-negro);
+}
+
+.mis-tableros h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Mensaje cuando no hay tableros */
+.sin-tableros {
+  font-size: 1.1rem;
+  color: var(--color-gris-medio);
+  text-align: center;
+}
+
+/* Contenedor de tarjetas */
+.lista-tableros {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Tarjeta de tablero */
+.tarjeta-tablero {
+  margin: 0 2rem;
+  padding: 1.5rem;
+  background-color: var(--color-blanco);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-tablero:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.tarjeta-tablero h3 {
+  margin-top: 0;
+  font-size: 1.3rem;
+}
+
+.tarjeta-tablero p {
+  margin: 0.5rem 0;
+  color: var(--color-gris-medio);
+}
+
+.tarjeta-tablero .tipo {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  background-color: var(--color-gris-claro);
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+}
+
+/* Botones de acción */
+.acciones-tablero {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.acciones-tablero button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--color-verde);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.acciones-tablero .eliminar {
+  background-color: #d93025; 
+}
+
+.acciones-tablero button:hover {
+  opacity: 0.9;
+}
+
+/* Responsivo para tablets */
+@media (max-width: 768px) {
+  .mis-tableros {
+    padding: 1rem;
+  }
+
+  .acciones-tablero {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+}
+
+/* Responsivo para móviles */
+@media (max-width: 480px) {
+  .tarjeta-tablero {
+    padding: 1rem;
+  }
+
+  .tarjeta-tablero h3 {
+    font-size: 1.1rem;
+  }
+}
