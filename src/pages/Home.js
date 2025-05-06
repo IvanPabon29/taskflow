@@ -27,7 +27,7 @@ const Home = () => {
         </Link>
 
         {/* Opción: Ver mis tableros */}
-        <Link to="/listas-tareas/tableros" className="home-card">
+        <Link to="/listas-tareas/mis-tableros" className="home-card">
           <img src={iconCarpeta} alt="Mis tableros" className="home-icon" />
           <h3>Mis Tableros</h3>
           <p>Accede, edita o elimina tus tableros existentes.</p>

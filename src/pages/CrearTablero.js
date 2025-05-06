@@ -39,7 +39,7 @@ const CrearTablero = () => {
     localStorage.setItem("tableros", JSON.stringify(nuevosTableros));
 
     // Redirige al tablero recién creado
-    navigate(`/tablero/${nuevoTablero.id}`);
+    navigate(`/listas-tareas/tablero/${nuevoTablero.id}`);
   };
 
   return (
