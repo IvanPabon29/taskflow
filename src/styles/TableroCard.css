@@ -1,0 +1,110 @@
+/* src/styles/TableroCard.css */
+
+/* Contenedor de cada tarjeta de tablero */
+.tablero-card {
+  margin: 0 2rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--color-negro);
+}
+
+.tablero-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Información principal del tablero */
+.tablero-card-info h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.tablero-card-descripcion {
+  margin: 0.5rem 0;
+  color: var(--color-gris-medio);
+  font-size: 0.95rem;
+}
+
+.tablero-card-tipo {
+  font-size: 0.85rem;
+  background-color: var(--color-blanco);
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.5rem;
+  color: var(--color-negro);
+  display: inline-block;
+}
+
+/* Botones */
+.tablero-card-acciones {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.tablero-card-acciones button {
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+/* Botón Ver */
+.btn-ver {
+  width: 6rem;
+  background-color: var(--color-verde);
+  color: var(--color-blanco);
+}
+
+.btn-ver:hover {
+  background-color: #047a20;
+}
+
+/* Botón Eliminar */
+.btn-eliminar {
+  background-color: #d94c4c;
+  color: var(--color-blanco);
+}
+
+.btn-eliminar:hover {
+  background-color: #b93c3c;
+}
+
+/* Responsivo para tablets */
+@media (max-width: 768px) {
+  .tablero-card {
+    padding: 1.2rem;
+  }
+
+  .tablero-card-info h3 {
+    font-size: 1.2rem;
+  }
+
+  .tablero-card-descripcion {
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsivo para móviles */
+@media (max-width: 480px) {
+  .tablero-card {
+    padding: 1rem;
+  }
+
+  .tablero-card-acciones {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tablero-card-acciones button {
+    width: 100%;
+  }
+}
