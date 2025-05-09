@@ -1,28 +1,36 @@
 // src/pages/MisTableros.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import TableroCard from "../components/TableroCard"; 
 import "../styles/MisTableros.css";
 
 /**
  * Página que muestra todos los tableros creados por el usuario.
- * Permite navegar, eliminar o editar cada tablero.
+ * Usa el componente <TableroCard /> para mostrar cada tablero individualmente.
+ * Permite ver y eliminar cada tablero.
  */
 const MisTableros = () => {
   const [tableros, setTableros] = useState([]);
   const navigate = useNavigate();
 
-  // Carga los tableros desde localStorage al montar el componente
+  // Cargar los tableros desde localStorage cuando se monta el componente
   useEffect(() => {
     const tablerosGuardados = JSON.parse(localStorage.getItem("tableros")) || [];
     setTableros(tablerosGuardados);
   }, []);
 
-  // Redirige al tablero seleccionado
+  /**
+   * Redirige a la vista del tablero seleccionado.
+   * @param {number} id - ID del tablero a mostrar.
+   */
   const manejarVer = (id) => {
     navigate(`/listas-tareas/tablero/${id}`);
   };
 
-  // Elimina un tablero con confirmación
+  /**
+   * Elimina un tablero tras confirmación.
+   * @param {number} id - ID del tablero a eliminar.
+   */
   const manejarEliminar = (id) => {
     const confirmar = window.confirm("¿Estás seguro de eliminar este tablero?");
     if (confirmar) {
@@ -40,21 +48,16 @@ const MisTableros = () => {
       ) : (
         <div className="lista-tableros">
           {tableros.map((tablero) => (
-            <article
+            <TableroCard
               key={tablero.id}
-              className="tarjeta-tablero"
-              style={{ backgroundColor: tablero.color || "var(--color-gris-claro)" }}
-            >
-              <h3>{tablero.nombre}</h3>
-              <p>{tablero.descripcion}</p>
-              {tablero.tipo && <span className="tipo">Tipo: {tablero.tipo}</span>}
-              <div className="acciones-tablero">
-                <button onClick={() => manejarVer(tablero.id)}>Ver</button>
-                <button className="eliminar" onClick={() => manejarEliminar(tablero.id)}>
-                  Eliminar
-                </button>
-              </div>
-            </article>
+              id={tablero.id}
+              nombre={tablero.nombre}
+              descripcion={tablero.descripcion}
+              tipo={tablero.tipo}
+              color={tablero.color}
+              onVer={manejarVer}
+              onEliminar={manejarEliminar}
+            />
           ))}
         </div>
       )}
