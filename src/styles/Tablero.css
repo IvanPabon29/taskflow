@@ -5,18 +5,13 @@
   width: 100%;
   padding: 2rem;
   min-height: 100vh;
-  background-color: var(--color-fondo);
   color: var(--color-negro);
 }
 
 /* Header del tablero */
 .tablero-header {
-  background-color: var(--color-blanco);
-  padding: 1.5rem;
-  border-left: 6px solid var(--color-verde);
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 /* Titulo */
@@ -25,55 +20,70 @@
   margin-bottom: 0.5rem;
 }
 
-/* Descripcion */
-.tablero-header p {
-  margin: 0.25rem 0;
-  color: var(--color-gris-medio);
+.tablero-header .descripcion {
+  font-size: 1rem;
+  opacity: 0.8;
 }
 
 .tablero-header .tipo {
-  font-weight: bold;
-  text-transform: capitalize;
-  color: var(--color-negro);
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
 }
 
-/* Cuerpo */
-.tablero-body {
-  background-color: var(--color-blanco);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
-  text-align: center;
-  color: var(--color-gris-medio);
-  font-style: italic;
+/* Diseño columnas Tipo KANBAN */
+.kanban-columnas {
+  display: flex;
+  gap: 1.5rem;
+  padding-bottom: 2rem;
+  overflow: auto;
 }
 
-/* Responsivo para tablets */
+/* Scroll horizontal visual  */
+.kanban-columnas::-webkit-scrollbar {
+  height: 10px;
+}
+.kanban-columnas::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10pr;
+}
+
+/* Responsive para tablets */
 @media (max-width: 768px) {
-  .tablero-header h2 {
-    font-size: 1.5rem;
+  .tablero {
+    padding: 1.5rem 1rem;
   }
 
-  .tablero-body {
-    padding: 1.5rem;
+  .tablero-header h2 {
+    font-size: 1.6rem;
   }
+
+  .tablero-header .descripcion {
+    font-size: 0.95rem;
+  }
+
+  .kanban-columnas {
+    gap: 1rem;
+  }
+
 }
 
-/* Responsivo para móviles */
+/* Responsive para moviles  */
 @media (max-width: 480px) {
-  .tablero {
-    padding: 1rem;
-  }
-
-  .tablero-header {
-    padding: 1rem;
-  }
-
   .tablero-header h2 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
-  .tablero-body {
-    padding: 1rem;
+  .tablero-header .descripcion {
+    font-size: 0.85rem;
   }
+
+  .kanban-columnas {
+    align-items: center;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
 }
