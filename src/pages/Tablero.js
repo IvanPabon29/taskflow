@@ -1,25 +1,19 @@
-// src/pages/Tablero.jsx
+// src/pages/Tablero.js
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import TaskCard from "../components/TaskCard";
+import ListaTablero from "../components/ListaTablero";
 import "../styles/Tablero.css";
 
 /**
  * Página que representa un tablero individual de tareas.
- * Permite visualizar el tablero y añadir nuevas tareas.
+ * Muestra tareas organizadas en columnas tipo Kanban.
  */
 const Tablero = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [tablero, setTablero] = useState(null);
-  const [nuevaTarea, setNuevaTarea] = useState({
-    titulo: "",
-    descripcion: "",
-    estado: "pendiente",
-    prioridad: "media",
-  });
 
-  // Carga el tablero desde localStorage por ID
+  // Carga el tablero por ID desde localStorage
   useEffect(() => {
     const tableros = JSON.parse(localStorage.getItem("tableros")) || [];
     const encontrado = tableros.find((t) => t.id === Number(id));
@@ -32,102 +26,93 @@ const Tablero = () => {
     }
   }, [id, navigate]);
 
-  // Maneja cambios en el formulario de tarea
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNuevaTarea((prev) => ({ ...prev, [name]: value }));
-  };
-
-  // Agrega la nueva tarea al tablero
-  const handleAddTarea = (e) => {
-    e.preventDefault();
-
-    const actualizados = JSON.parse(localStorage.getItem("tableros")) || [];
-    const indice = actualizados.findIndex((t) => t.id === Number(id));
-
+  // Función para actualizar tareas en una columna específica
+  const actualizarTareasPorEstado = (estado, tareasActualizadas) => {
+    const tableros = JSON.parse(localStorage.getItem("tableros")) || [];
+    const indice = tableros.findIndex((t) => t.id === Number(id));
     if (indice === -1) return;
 
-    const nueva = { ...nuevaTarea };
-    actualizados[indice].tareas.push(nueva);
-    localStorage.setItem("tableros", JSON.stringify(actualizados));
-    setTablero(actualizados[indice]); // Actualiza estado local
-    setNuevaTarea({ titulo: "", descripcion: "", estado: "pendiente", prioridad: "media" }); // Limpia form
+    // Filtra las tareas que no pertenecen al estado actual
+    const nuevasTareas = tableros[indice].tareas.filter((t) => t.estado !== estado);
+    tableros[indice].tareas = [...nuevasTareas, ...tareasActualizadas];
+    localStorage.setItem("tableros", JSON.stringify(tableros));
+    setTablero(tableros[indice]);
   };
 
-  /**
-   * Elimina una tarea por su índice.
-   * @param {number} index - Índice de la tarea a eliminar.
-   */
-  const handleEliminarTarea = (index) => {
-    const actualizados = JSON.parse(localStorage.getItem("tableros")) || [];
-    const indice = actualizados.findIndex((t) => t.id === Number(id));
-    if (indice === -1) return;
+  // Funciones para agregar y eliminar tareas
+  const handleAgregarTarea = (estado, nuevaTarea) => {
+    const tareaConEstado = { ...nuevaTarea, estado };
+    const tareasEstado = tablero.tareas.filter((t) => t.estado === estado);
+    const tareasActualizadas = [...tareasEstado, tareaConEstado];
+    actualizarTareasPorEstado(estado, tareasActualizadas);
+  };
 
-    actualizados[indice].tareas.splice(index, 1); // Elimina la tarea
-    localStorage.setItem("tableros", JSON.stringify(actualizados));
-    setTablero(actualizados[indice]);
+  // Elimina una tarea de un estado específico
+  const handleEliminarTarea = (estado, index) => {
+    const tareasEstado = tablero.tareas.filter((t) => t.estado === estado);
+    tareasEstado.splice(index, 1);
+    actualizarTareasPorEstado(estado, tareasEstado);
   };
 
   if (!tablero) return null;
 
+  // Agrupa las tareas por estado
+  const tareasPorEstado = {
+    pendiente: [],
+    "en-progreso": [],
+    completada: [],
+    notas: [],
+  };
+
+  // Asigna tareas a su respectivo estado
+  tablero.tareas.forEach((tarea) => {
+    const estado = tarea.estado || "pendiente";
+    if (estado in tareasPorEstado) {
+      tareasPorEstado[estado].push(tarea);
+    } else {
+      tareasPorEstado.pendiente.push(tarea);
+    }
+  });
+
   return (
     <main
       className="tablero"
-      style={{ backgroundColor: tablero.color || "var(--color-gris-claro)" }}
+      style={{ backgroundColor: tablero.color || "var(--color-fondo)" }}
     >
-      <header className="tablero-header">
+      <div className="tablero-header">
         <h2>{tablero.nombre}</h2>
         <p className="descripcion">{tablero.descripcion}</p>
         {tablero.tipo && <span className="tipo">Tipo: {tablero.tipo}</span>}
-      </header>
+      </div>
+      
+      <section className="kanban-columnas">
+        <ListaTablero
+          titulo="Pendiente"
+          tareas={tareasPorEstado.pendiente}
+          onAddTarea={(t) => handleAgregarTarea("pendiente", t)}
+          onDeleteTarea={(index) => handleEliminarTarea("pendiente", index)}
+        />
 
-      <section className="formulario-tarea">
-        <h3>Agregar nueva tarea</h3>
-        <form onSubmit={handleAddTarea}>
-          <input
-            type="text"
-            name="titulo"
-            value={nuevaTarea.titulo}
-            onChange={handleChange}
-            placeholder="Título de la tarea"
-            required
-          />
-          <textarea
-            name="descripcion"
-            value={nuevaTarea.descripcion}
-            onChange={handleChange}
-            placeholder="Descripción"
-            required
-          />
-          <select name="estado" value={nuevaTarea.estado} onChange={handleChange}>
-            <option value="pendiente">Pendiente</option>
-            <option value="en-progreso">En progreso</option>
-            <option value="completada">Completada</option>
-          </select>
-          <select name="prioridad" value={nuevaTarea.prioridad} onChange={handleChange}>
-            <option value="alta">Alta</option>
-            <option value="media">Media</option>
-            <option value="baja">Baja</option>
-          </select>
-          <button type="submit">Agregar tarea</button>
-        </form>
-      </section>
+        <ListaTablero
+          titulo="En Progreso"
+          tareas={tareasPorEstado["en-progreso"]}
+          onAddTarea={(t) => handleAgregarTarea("en-progreso", t)}
+          onDeleteTarea={(index) => handleEliminarTarea("en-progreso", index)}
+        />
 
-      <section className="tablero-tareas">
-        {tablero.tareas.length === 0 ? (
-          <p className="info-tareas">(Aún no hay tareas añadidas)</p>
-        ) : (
-          tablero.tareas.map((tarea, index) => (
-            <TaskCard
-              key={index}
-              titulo={tarea.titulo}
-              descripcion={tarea.descripcion}
-              estado={tarea.estado}
-              prioridad={tarea.prioridad}
-              onDelete={() => handleEliminarTarea(index)}
-            />
-          ))
-        )}
+        <ListaTablero
+          titulo="Completada"
+          tareas={tareasPorEstado.completada}
+          onAddTarea={(t) => handleAgregarTarea("completada", t)}
+          onDeleteTarea={(index) => handleEliminarTarea("completada", index)}
+        />
+
+        <ListaTablero
+          titulo="Notas y Referencias"
+          tareas={tareasPorEstado.notas}
+          onAddTarea={(t) => handleAgregarTarea("notas", t)}
+          onDeleteTarea={(index) => handleEliminarTarea("notas", index)}
+        />
       </section>
     </main>
   );
