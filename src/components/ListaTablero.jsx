@@ -1,5 +1,4 @@
 // src/components/ListaTablero.jsx
-import React from "react";
 import TaskCard from "./TaskCard";
 import "../styles/ListaTablero.css";
 
@@ -14,11 +13,9 @@ import "../styles/ListaTablero.css";
 const ListaTablero = ({ titulo, tareas = [], onAddTarea, onDeleteTarea }) => {
   return (
     <div className="lista-tablero">
-      <div className="lista-header">
-        <h3>{titulo}</h3>
-      </div>
+      <h3>{titulo}</h3>
 
-      <div className="contenedor-tareas">
+      <div className="lista-tareas">
         {tareas.length === 0 ? (
           <p className="mensaje-vacio">(Sin tareas en esta columna)</p>
         ) : (
@@ -33,10 +30,10 @@ const ListaTablero = ({ titulo, tareas = [], onAddTarea, onDeleteTarea }) => {
             />
           ))
         )}
-
-        {/* Botón para agregar nueva tarea */}
-        <TaskCard esAgregar={true} onAdd={onAddTarea} />
       </div>
+
+      {/* Botón de agregar tarea como un TaskCard especial */}
+      <TaskCard esAgregar={true} onAdd={onAddTarea} />
     </div>
   );
 };
