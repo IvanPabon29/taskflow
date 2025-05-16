@@ -1,63 +1,108 @@
-/* src/styles/TaskCard.css */
-
-/* Estilos base para la tarjeta de tarea */
+/* Modal para crear tarea */
 .task-card {
-  background-color: var(--color-blanco);
-  border: 1px solid var(--color-gris-claro);
-  border-left: 4px solid var(--color-verde);
-  border-radius: 12px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--color-fondo);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.8rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: transform 0.2s ease;
 }
 
-/* Efecto Hover */
 .task-card:hover {
-  transform: scale(1.01);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transform: scale(1.02);
 }
 
-/* Titulo */
-.task-card h4 {
+.task-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-title {
+  font-size: 1rem;
+  font-weight: bold;
   margin: 0;
-  color: var(--color-negro);
+}
+
+.task-desc {
+  font-size: 0.9rem;
+  color: #444;
+  margin: 0;
+  white-space: pre-line;
+}
+
+.task-tags {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.estado-tag,
+.prioridad-tag {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  color: var(--color-blanco);
+  text-transform: capitalize;
+}
+
+.estado-tag.pendiente {
+  background-color: #f0ad4e;
+}
+.estado-tag.en-progreso {
+  background-color: #5bc0de;
+}
+.estado-tag.completada {
+  background-color: #5cb85c;
+}
+
+.prioridad-tag.alta {
+  background-color: #d9534f;
+}
+.prioridad-tag.media {
+  background-color: #f0ad4e;
+}
+.prioridad-tag.baja {
+  background-color: #5bc0de;
+}
+
+.btn-delete {
+  background: transparent;
+  width: auto;
+  border: none;
+  color: #d11a2a;
   font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-/* Descripcion */
-.task-card p {
-  margin-top: 0.5rem;
-  font-size: 0.95rem;
-  color: var(--color-gris-medio);
-}
+/* ---------------------------------------
+   Modal para crear tarea
 
-/* Responsive en 768px*/
+
+/* Responsive */
 @media (max-width: 768px) {
-  .task-card {
-    padding: 0.9rem;
+
+  .task-title {
+    font-size: 0.95rem;
   }
 
-  .task-card h4 {
-    font-size: 1.1rem;
-  }
-
-  .task-card p {
-    font-size: 0.9rem;
-  }
-}
-
-/* Responsive en 480px */
-@media (max-width: 480px) {
-  .task-card {
-    padding: 0.8rem;
-  }
-
-  .task-card h4 {
-    font-size: 1rem;
-  }
-
-  .task-card p {
+  .task-desc {
     font-size: 0.85rem;
   }
+
+  .estado-tag,
+  .prioridad-tag {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+
 }
