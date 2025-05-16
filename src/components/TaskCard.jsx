@@ -1,25 +1,38 @@
 // src/components/TaskCard.jsx
-import React from "react";
 import "../styles/TaskCard.css";
 
 /**
- * Componente visual para mostrar una tarea individual en el tablero.
- * @param {Object} props - Propiedades de la tarea.
+ * Componente visual para mostrar una tarea individual.
+ * @param {Object} props - Propiedades del componente.
  * @param {string} props.titulo - Título de la tarea.
- * @param {string} props.descripcion - Breve descripción de la tarea.
- * @param {string} [props.estado] - Estado de la tarea (ej. "pendiente", "en progreso", "completada").
- * @param {string} [props.prioridad] - Nivel de prioridad (ej. "alta", "media", "baja").
+ * @param {string} props.descripcion - Descripción de la tarea.
+ * @param {string} props.estado - Estado de la tarea.
+ * @param {string} props.prioridad - Prioridad de la tarea.
+ * @param {Function} props.onDelete - Función para eliminar la tarea.
  */
-const TaskCard = ({ titulo, descripcion, estado = "pendiente", prioridad = "media" }) => {
+const TaskCard = ({
+  titulo,
+  descripcion,
+  estado = "pendiente",
+  prioridad = "media",
+  onDelete,
+}) => {
   return (
-    <div className={`task-card prioridad-${prioridad} estado-${estado}`}>
-      <h4 className="task-titulo">{titulo}</h4>
-      <p className="task-descripcion">{descripcion}</p>
-      <div className="task-meta">
-        <span className="task-estado">Estado: {estado}</span>
-        <span className="task-prioridad">Prioridad: {prioridad}</span>
+    <article className={`task-card card-prioridad-${prioridad} card-estado-${estado}`}>
+      <div className="task-card-header">
+        <h4 className="task-title">{titulo}</h4>
+        {onDelete && (
+          <button className="btn-delete" onClick={onDelete} title="Eliminar tarea">
+            &times;
+          </button>
+        )}
       </div>
-    </div>
+      <p className="task-desc">{descripcion}</p>
+      <div className="task-tags">
+        <span className={`estado-tag ${estado}`}>{estado}</span>
+        <span className={`prioridad-tag ${prioridad}`}>{prioridad}</span>
+      </div>
+    </article>
   );
 };
 
