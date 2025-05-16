@@ -12,7 +12,7 @@ import logo from "../assets/img/logo.png";
  */
 const Registro = () => {
   const navigate = useNavigate();  // Usamos useNavigate para redirigir al usuario
-  const [setUserData] = useLocalStorage("userData", null);
+  const [, setUserData] = useLocalStorage("userData", null);
   const [formData, setFormData] = useState({
     nombre: "",
     correo: "",
