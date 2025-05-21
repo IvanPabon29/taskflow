@@ -1,0 +1,146 @@
+/* Modal para crear tarea */
+.modal-tarea {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30, 30, 30, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+/* Contenido del modal */
+.modal-contenido {
+  background-color: var(--color-blanco);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 430px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-contenido h3 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  text-align: center;
+  color: var(--color-negro);
+}
+
+.modal-contenido form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.modal-contenido input,
+.modal-contenido textarea,
+.modal-contenido select {
+  padding: 0.6rem;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+  resize: none;
+}
+
+/* Botones */
+.modal-btns {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.modal-btns button {
+  flex: 1;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.modal-btns button[type="submit"] {
+  background-color: #047a20;
+  color: var(--color-blanco);
+}
+
+.modal-btns button[type="submit"]:hover {
+  background-color: #035317;
+}
+
+.modal-btns button[type="button"] {
+  background-color: #ccc;
+  color: black;
+}
+
+.modal-btns button[type="button"]:hover {
+  background-color: #aaa;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsivo para tablets */
+@media (max-width: 768px) {
+  .modal-contenido {
+    padding: 1.2rem;
+    width: 85%;
+  }
+
+  .modal-contenido h3 {
+    font-size: 1.25rem;
+  }
+
+  .modal-contenido input,
+  .modal-contenido textarea,
+  .modal-contenido select {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  .modal-btns {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .modal-btns button {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsivo para móviles */
+@media (max-width: 480px) {
+  .modal-contenido {
+    padding: 1rem;
+  }
+
+  .modal-contenido h3 {
+    font-size: 1.2rem;
+  }
+
+  .modal-contenido input,
+  .modal-contenido textarea,
+  .modal-contenido select {
+    font-size: 0.85rem;
+  }
+
+  .modal-btns button {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+}
+
