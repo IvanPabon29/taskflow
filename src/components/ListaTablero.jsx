@@ -1,5 +1,6 @@
 // src/components/ListaTablero.jsx
 import React, { useState } from "react";
+import ModalNuevaTarea from "./ModalNuevaTarea";
 import TaskCard from "./TaskCard";
 import "../styles/ListaTablero.css";
 
@@ -40,75 +41,44 @@ const ListaTablero = ({ titulo, tareas, onAddTarea, onDeleteTarea }) => {
     });
     setModalAbierto(false);
   };
-  
-  return (
-    <div className="lista-tablero">
-      <h3>{titulo}</h3>
 
-      <div className="lista-tareas">
-        {tareas.length === 0 ? (
-          <p className="mensaje-vacio">(Sin tareas en esta columna)</p>
-        ) : (
-          tareas.map((tarea, index) => (
-            <TaskCard
-              key={index}
-              titulo={tarea.titulo}
-              descripcion={tarea.descripcion}
-              estado={tarea.estado}
-              prioridad={tarea.prioridad}
-              onDelete={() => onDeleteTarea(index)}
-            />
-          ))
-        )}
+  return (
+    <>
+      <div className="lista-tablero">
+        <h3>{titulo}</h3>
+
+        <div className="lista-tareas">
+          {tareas.length === 0 ? (
+            <p className="mensaje-vacio">(Sin tareas en esta columna)</p>
+          ) : (
+            tareas.map((tarea, index) => (
+              <TaskCard
+                key={index}
+                titulo={tarea.titulo}
+                descripcion={tarea.descripcion}
+                estado={tarea.estado}
+                prioridad={tarea.prioridad}
+                onDelete={() => onDeleteTarea(index)}
+              />
+            ))
+          )}
+        </div>
+
+        {/* Botón para agregar tarea */}
+        <button className="agregar-btn" onClick={() => setModalAbierto(true)}>
+          + Agregar tarea
+        </button>
       </div>
 
-      {/* Botón para agregar tarea */}
-      <button className="task-card agregar-btn" onClick={() => setModalAbierto(true)}>
-        + Agregar tarea
-      </button>
-
-      {/* Modal para agregar tarea */}
-      {modalAbierto && (
-        <div className="modal-tarea" onClick={() => setModalAbierto(false)}>
-          <div className="modal-contenido" onClick={(e) => e.stopPropagation()}>
-            <h3>Agregar nueva tarea</h3>
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="titulo"
-                placeholder="Título"
-                value={formData.titulo}
-                onChange={handleChange}
-                required
-              />
-              <textarea
-                name="descripcion"
-                placeholder="Descripción"
-                value={formData.descripcion}
-                onChange={handleChange}
-                required
-              />
-              <select name="estado" value={formData.estado} onChange={handleChange}>
-                <option value="pendiente">Pendiente</option>
-                <option value="en-progreso">En progreso</option>
-                <option value="completada">Completada</option>
-              </select>
-              <select name="prioridad" value={formData.prioridad} onChange={handleChange}>
-                <option value="alta">Alta</option>
-                <option value="media">Media</option>
-                <option value="baja">Baja</option>
-              </select>
-              <div className="modal-btns">
-                <button type="submit">Crear</button>
-                <button type="button" onClick={() => setModalAbierto(false)}>
-                  Cancelar
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-    </div>
+      {/* Modal NUEVO – ahora es global */}
+      <ModalNuevaTarea
+        visible={modalAbierto}
+        onClose={() => setModalAbierto(false)}
+        onSubmit={handleSubmit}
+        formData={formData}
+        handleChange={handleChange}
+      />
+    </>
   );
 };
 
