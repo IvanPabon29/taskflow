@@ -9,6 +9,9 @@ import Tablero from "./pages/Tablero";
 import MisTableros from "./pages/MisTableros";
 import MiPerfil from "./pages/MiPerfil";
 import About from "./pages/About";
+import PoliticasPrivacidad from "./pages/PoliticasPrivacidad";
+import TerminosCondiciones from "./pages/TerminosCondiciones";
+import Contacto from "./pages/Contacto";
 import NotFound from "./pages/NotFound";
 
 
@@ -29,6 +32,9 @@ function App() {
             <Route path="mis-tableros" element={<MisTableros />} />
             <Route path="mi-perfil" element={<MiPerfil />} />
             <Route path="acerca-de" element={<About />} />
+            <Route path="politicas-privacidad" element={<PoliticasPrivacidad />} />
+            <Route path="terminos-condiciones" element={<TerminosCondiciones/>} />
+            <Route path="contacto" element={<Contacto />} />
             
             {/* Ruta para manejar páginas no encontradas 404 dentro del Layout */}
             <Route path="*" element={<NotFound />} />
