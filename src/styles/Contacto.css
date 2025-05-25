@@ -1,0 +1,131 @@
+/* src/styles/Contacto.css */
+
+/* Contanier */
+.contacto-container {
+  width: 100%;
+  padding: 3rem 4rem;
+  color: var(--color-negro);
+  background-color: var(--color-fondo);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  animation: fadeSlideIn 0.8s ease-out forwards;
+}
+
+.contacto-container h1 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.contacto-container .intro {
+  font-size: 1.1rem;
+  text-align: center;
+  color: var(--color-gris-medio);
+  max-width: 700px;
+  margin-bottom: 0.5rem;
+}
+
+/* Formulario */
+.formulario-contacto {
+  background-color: var(--color-blanco);
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeSlideIn 1s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+}
+
+.campo label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.campo input,
+.campo textarea {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-gris-claro);
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: var(--color-blanco);
+  transition: border 0.3s ease;
+}
+
+.campo input:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: var(--color-negro);
+}
+
+/* Botón */
+.boton-enviar-contacto {
+  background-color: var(--color-verde);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:  0.3s ease, transform 0.2s ease;
+  align-self: flex-end;
+}
+
+.boton-enviar-contacto:hover {
+  background-color: #035317;
+  transform: translateY(-2px);
+}
+
+/* Animación */
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive tablets */
+@media (max-width: 768px) {
+  .contacto-container {
+    padding: 2rem 1rem;
+  }
+
+  .contacto-container h1 {
+    font-size: 2rem;
+  }
+
+  .formulario-contacto {
+    padding: 2rem;
+  }
+
+  .boton-enviar-contacto {
+    width: 100%;
+    align-self: center;
+  }
+}
+
+/* Responsive móviles */
+@media (max-width: 480px) {
+  .contacto-container h1 {
+    font-size: 1.7rem;
+  }
+
+  .formulario-contacto {
+    padding: 1.5rem;
+  }
+
+  .campo input,
+  .campo textarea {
+    font-size: 0.95rem;
+  }
+}
