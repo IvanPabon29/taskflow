@@ -1,6 +1,6 @@
 // src/components/Footer.js
-import React from "react";
 import "../styles/Footer.css";
+import { Link } from "react-router-dom";
 
 /**
  *  Componente Footer
@@ -13,13 +13,13 @@ const Footer = () => {
       <div className="footer-container">
         <ul className="footer-links">
           <li>
-            <a href="/listas-tareas/privacy">Política de Privacidad</a>
+            <Link to="/listas-tareas/politicas-privacidad">Políticas de Privacidad</Link>
           </li>
           <li>
-            <a href="/listas-tareas/terms">Términos y Condiciones</a>
+            <Link to="/listas-tareas/terminos-condiciones">Términos y Condiciones</Link>
           </li>
           <li>
-            <a href="/listas-tareas/contact">Contacto</a>
+            <Link to="/listas-tareas/contacto">Contacto</Link>
           </li>
         </ul>
         <p>
