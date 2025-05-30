@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ListaTablero from "../components/ListaTablero";
+import SortableContextWrapper from "../components/SortableContextWrapper";
+import DraggableColumn from "../components/DraggableColumn";
 import "../styles/Tablero.css";
 
 /**
@@ -12,6 +14,28 @@ const Tablero = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [tablero, setTablero] = useState(null);
+
+  // Carga el orden de las columnas desde localStorage o usa un orden por defecto
+  const ordenInicial = JSON.parse(localStorage.getItem(`ordenColumnas-${id}`)) || [
+    "pendiente",
+    "en-progreso",
+    "completada",
+    "notas",
+  ];
+  const [ordenColumnas, setOrdenColumnas] = useState(ordenInicial);
+
+  // Guarda el orden de las columnas en localStorage al cambiar
+  useEffect(() => {
+    localStorage.setItem(`ordenColumnas-${id}`, JSON.stringify(ordenColumnas));
+  }, [ordenColumnas, id]);
+
+  // Títulos de las columnas 
+  const TITULOS = {
+    pendiente: "Pendiente",
+    "en-progreso": "En Progreso",
+    completada: "Completada",
+    notas: "Notas y Referencias",
+  };
 
   // Carga el tablero por ID desde localStorage
   useEffect(() => {
@@ -75,7 +99,7 @@ const Tablero = () => {
   });
 
   return (
-    <main
+    <div
       className="tablero"
       style={{ backgroundColor: tablero.color || "var(--color-fondo)" }}
     >
@@ -86,35 +110,20 @@ const Tablero = () => {
       </div>
       
       <section className="kanban-columnas">
-        <ListaTablero
-          titulo="Pendiente"
-          tareas={tareasPorEstado.pendiente}
-          onAddTarea={(t) => handleAgregarTarea("pendiente", t)}
-          onDeleteTarea={(index) => handleEliminarTarea("pendiente", index)}
-        />
-
-        <ListaTablero
-          titulo="En Progreso"
-          tareas={tareasPorEstado["en-progreso"]}
-          onAddTarea={(t) => handleAgregarTarea("en-progreso", t)}
-          onDeleteTarea={(index) => handleEliminarTarea("en-progreso", index)}
-        />
-
-        <ListaTablero
-          titulo="Completada"
-          tareas={tareasPorEstado.completada}
-          onAddTarea={(t) => handleAgregarTarea("completada", t)}
-          onDeleteTarea={(index) => handleEliminarTarea("completada", index)}
-        />
-
-        <ListaTablero
-          titulo="Notas y Referencias"
-          tareas={tareasPorEstado.notas}
-          onAddTarea={(t) => handleAgregarTarea("notas", t)}
-          onDeleteTarea={(index) => handleEliminarTarea("notas", index)}
-        />
+        <SortableContextWrapper items={ordenColumnas} setItems={setOrdenColumnas}>
+          {ordenColumnas.map((estado) => (
+            <DraggableColumn key={estado} id={estado}>
+              <ListaTablero
+                titulo={TITULOS[estado]}
+                tareas={tareasPorEstado[estado]}
+                onAddTarea={(t) => handleAgregarTarea(estado, t)}
+                onDeleteTarea={(index) => handleEliminarTarea(estado, index)}
+              />
+            </DraggableColumn>
+          ))}
+        </SortableContextWrapper>
       </section>
-    </main>
+    </div>
   );
 };
 
