@@ -13,7 +13,7 @@ import "../styles/ListaTablero.css";
  * @param {Function} props.onDeleteTarea - Función para eliminar una tarea.
  */
 
-const ListaTablero = ({ titulo, tareas, onAddTarea, onDeleteTarea }) => {
+const ListaTablero = ({ titulo, tareas, onAddTarea, onDeleteTarea,  dragProps }) => {
   const [modalAbierto, setModalAbierto] = useState(false);
   const [formData, setFormData] = useState({
     titulo: "",
@@ -45,8 +45,9 @@ const ListaTablero = ({ titulo, tareas, onAddTarea, onDeleteTarea }) => {
   return (
     <>
       <div className="lista-tablero">
-        <h3>{titulo}</h3>
-
+        <h3 className="lista-titulo" {...dragProps}>
+          {titulo}
+        </h3>
         <div className="lista-tareas">
           {tareas.length === 0 ? (
             <p className="mensaje-vacio">(Sin tareas en esta columna)</p>
