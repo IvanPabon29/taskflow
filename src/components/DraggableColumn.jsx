@@ -1,4 +1,5 @@
 // src/components/DraggableColumn.jsx
+import React from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
@@ -21,9 +22,14 @@ const DraggableColumn = ({ id, children }) => {
     transition,
   };
 
+  // Clonamos el children (ListaTablero) para insertar los listeners en el h3
+  const clonedChild = React.cloneElement(children, {
+    dragProps: { ...attributes, ...listeners },
+  });
+
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      {children}
+     <div ref={setNodeRef} style={style}>
+      {clonedChild}
     </div>
   );
 };
