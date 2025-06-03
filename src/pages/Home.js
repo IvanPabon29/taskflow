@@ -34,7 +34,7 @@ const Home = () => {
         </Link>
 
         {/* Opción: Ver estadísticas */}
-        <Link to="/listas-tareas/resumen" className="home-card">
+        <Link to="/listas-tareas/estadisticas" className="home-card">
           <img src={iconEstadisticas} alt="Estadísticas" className="home-icon" />
           <h3>Estadísticas</h3>
           <p>Consulta tus avances, tareas completadas, tiempo invertido y más.</p>

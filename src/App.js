@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import CrearTablero from "./pages/CrearTablero";
 import Tablero from "./pages/Tablero";
 import MisTableros from "./pages/MisTableros";
+import Estadisticas from "./pages/Estadisticas";
 import MiPerfil from "./pages/MiPerfil";
 import About from "./pages/About";
 import PoliticasPrivacidad from "./pages/PoliticasPrivacidad";
@@ -30,6 +31,8 @@ function App() {
             <Route path="tablero/:id" element={<Tablero />} />
             
             <Route path="mis-tableros" element={<MisTableros />} />
+            <Route path="estadisticas" element={<Estadisticas />} />
+            <Route path="estadisticas/:id" element={<Estadisticas />} />
             <Route path="mi-perfil" element={<MiPerfil />} />
             <Route path="acerca-de" element={<About />} />
             <Route path="politicas-privacidad" element={<PoliticasPrivacidad />} />
