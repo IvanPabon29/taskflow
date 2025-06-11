@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ListaTablero from "../components/ListaTablero";
-import SortableContextWrapper from "../components/SortableContextWrapper";
 import DraggableColumn from "../components/DraggableColumn";
+import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
+import { SortableContext, arrayMove, horizontalListSortingStrategy } from "@dnd-kit/sortable";
 import "../styles/Tablero.css";
 
 /**
@@ -37,6 +38,8 @@ const Tablero = () => {
     notas: "Notas y Referencias",
   };
 
+  const sensors = useSensors(useSensor(PointerSensor));
+
   // Carga el tablero por ID desde localStorage
   useEffect(() => {
     const tableros = JSON.parse(localStorage.getItem("tableros")) || [];
@@ -50,37 +53,67 @@ const Tablero = () => {
     }
   }, [id, navigate]);
 
-  // Función para actualizar tareas en una columna específica
-  const actualizarTareasPorEstado = (estado, tareasActualizadas) => {
+  // Actualiza las tareas del tablero en localStorage
+  const actualizarTareas = (tareasActualizadas) => {
     const tableros = JSON.parse(localStorage.getItem("tableros")) || [];
     const indice = tableros.findIndex((t) => t.id === Number(id));
     if (indice === -1) return;
-
-    // Filtra las tareas que no pertenecen al estado actual
-    const nuevasTareas = tableros[indice].tareas.filter((t) => t.estado !== estado);
-    tableros[indice].tareas = [...nuevasTareas, ...tareasActualizadas];
+    tableros[indice].tareas = tareasActualizadas;
     localStorage.setItem("tableros", JSON.stringify(tableros));
     setTablero(tableros[indice]);
   };
 
-  // Funciones para agregar y eliminar tareas
-  const handleAgregarTarea = (estado, nuevaTarea) => {
-    const tareaConEstado = { ...nuevaTarea, estado };
-    const tareasEstado = tablero.tareas.filter((t) => t.estado === estado);
-    const tareasActualizadas = [...tareasEstado, tareaConEstado];
-    actualizarTareasPorEstado(estado, tareasActualizadas);
+  // Agrega una nueva tarea a un estado específico
+  const handleAgregarTarea = (nuevaTarea) => {
+    const tareasActualizadas = [...tablero.tareas, nuevaTarea];
+    actualizarTareas(tareasActualizadas);
   };
 
   // Elimina una tarea de un estado específico
   const handleEliminarTarea = (estado, index) => {
     const tareasEstado = tablero.tareas.filter((t) => t.estado === estado);
+    const tareasOtras = tablero.tareas.filter((t) => t.estado !== estado);
     tareasEstado.splice(index, 1);
-    actualizarTareasPorEstado(estado, tareasEstado);
+    actualizarTareas([...tareasOtras, ...tareasEstado]);
+  };
+
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    // Reordenar columnas
+    if (ordenColumnas.includes(active.id) && ordenColumnas.includes(over.id)) {
+      const oldIndex = ordenColumnas.indexOf(active.id);
+      const newIndex = ordenColumnas.indexOf(over.id);
+      const nuevoOrden = arrayMove(ordenColumnas, oldIndex, newIndex);
+      setOrdenColumnas(nuevoOrden);
+      return;
+    }
+
+    // Mover tarjetas entre columnas
+    const tareas = [...tablero.tareas];
+    const tareaMovida = tareas.find((t) => t.id === active.id);
+    if (!tareaMovida) return;
+
+    const nuevaColumna = obtenerEstadoDesdeId(over.id);
+    if (!nuevaColumna) return;
+
+    // Cambiar estado y actualizar
+    tareaMovida.estado = nuevaColumna;
+    actualizarTareas(tareas);
+  };
+
+  // Función para obtener el estado de una columna a partir de su ID
+  const obtenerEstadoDesdeId = (id) => {
+    for (const estado of ordenColumnas) {
+      if (id.startsWith(estado)) return estado;
+    }
+    return null;
   };
 
   if (!tablero) return null;
 
-  // Agrupa las tareas por estado
+  // Agrupar tareas por estado
   const tareasPorEstado = {
     pendiente: [],
     "en-progreso": [],
@@ -110,18 +143,20 @@ const Tablero = () => {
       </div>
       
       <section className="kanban-columnas">
-        <SortableContextWrapper items={ordenColumnas} setItems={setOrdenColumnas}>
-          {ordenColumnas.map((estado) => (
-            <DraggableColumn key={estado} id={estado}>
-              <ListaTablero
-                titulo={TITULOS[estado]}
-                tareas={tareasPorEstado[estado]}
-                onAddTarea={(t) => handleAgregarTarea(estado, t)}
-                onDeleteTarea={(index) => handleEliminarTarea(estado, index)}
-              />
-            </DraggableColumn>
-          ))}
-        </SortableContextWrapper>
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+          <SortableContext items={ordenColumnas} strategy={horizontalListSortingStrategy}>
+            {ordenColumnas.map((estado) => (
+              <DraggableColumn key={estado} id={estado}>
+                <ListaTablero
+                  titulo={TITULOS[estado]}
+                  tareas={tareasPorEstado[estado]}
+                  onAddTarea={(t) => handleAgregarTarea(estado, t)}
+                  onDeleteTarea={(index) => handleEliminarTarea(estado, index)}
+                />
+              </DraggableColumn>
+            ))}
+          </SortableContext>
+        </DndContext>
       </section>
     </div>
   );
