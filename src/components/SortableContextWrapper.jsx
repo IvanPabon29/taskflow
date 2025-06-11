@@ -1,24 +1,37 @@
 // src/components/SortableContextWrapper.jsx
 import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
-import { arrayMove, SortableContext, horizontalListSortingStrategy } from "@dnd-kit/sortable";
+import { SortableContext, horizontalListSortingStrategy, verticalListSortingStrategy } from "@dnd-kit/sortable";
 
 /**
- * Wrapper general que proporciona el contexto de drag-and-drop horizontal para columnas.
+ * Componente que proporciona contexto DnD. Admite estrategias y dragEnd externas.
+ * 
  */
-const SortableContextWrapper = ({ items, setItems, children }) => {
-  // Define los sensores para el contexto de arrastre
+const SortableContextWrapper = ({
+  items,
+  setItems,
+  strategy = "horizontal",
+  onDragEnd: externalOnDragEnd = null,
+  children,
+}) => {
   const sensors = useSensors(useSensor(PointerSensor));
 
   // Maneja el evento de finalización del arrastre
   const handleDragEnd = (event) => {
-    const { active, over } = event;
-    if (!over || active.id === over.id) return;
-    
-    // Reordena los elementos en función del arrastre
-    const oldIndex = items.indexOf(active.id);
-    const newIndex = items.indexOf(over.id);
-    const newOrder = arrayMove(items, oldIndex, newIndex);
-    setItems(newOrder);
+    if (externalOnDragEnd) {
+      externalOnDragEnd(event); // Para tareas
+    } else {
+      const { active, over } = event;
+      if (!over || active.id === over.id) return;
+      const oldIndex = items.indexOf(active.id);
+      const newIndex = items.indexOf(over.id);
+      if (oldIndex === -1 || newIndex === -1) return;
+      setItems((prev) => {
+        const newOrder = [...prev];
+        const [moved] = newOrder.splice(oldIndex, 1);
+        newOrder.splice(newIndex, 0, moved);
+        return newOrder;
+      });
+    }
   };
 
   return (
@@ -27,7 +40,14 @@ const SortableContextWrapper = ({ items, setItems, children }) => {
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
     >
-      <SortableContext items={items} strategy={horizontalListSortingStrategy}>
+      <SortableContext
+        items={items}
+        strategy={
+          strategy === "horizontal"
+            ? horizontalListSortingStrategy
+            : verticalListSortingStrategy
+        }
+      >
         {children}
       </SortableContext>
     </DndContext>
