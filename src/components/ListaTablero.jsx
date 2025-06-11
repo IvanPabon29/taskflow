@@ -1,7 +1,8 @@
 // src/components/ListaTablero.jsx
 import React, { useState } from "react";
 import ModalNuevaTarea from "./ModalNuevaTarea";
-import TaskCard from "./TaskCard";
+import DraggableTaskCard from "./DraggableTaskCard";
+import { SortableContext } from "@dnd-kit/sortable"; 
 import "../styles/ListaTablero.css";
 
 /**
@@ -11,6 +12,7 @@ import "../styles/ListaTablero.css";
  * @param {Array} props.tareas - Lista de tareas en la columna.
  * @param {Function} props.onAddTarea - Función para agregar una tarea nueva.
  * @param {Function} props.onDeleteTarea - Función para eliminar una tarea.
+ * @param {Object} props.dragProps - Props del título para el arrastre de la columna.
  */
 
 const ListaTablero = ({ titulo, tareas, onAddTarea, onDeleteTarea,  dragProps }) => {
@@ -18,7 +20,7 @@ const ListaTablero = ({ titulo, tareas, onAddTarea, onDeleteTarea,  dragProps })
   const [formData, setFormData] = useState({
     titulo: "",
     descripcion: "",
-    estado: "pendiente",
+    estado: titulo.toLowerCase(), // Usa el título como estado inicial
     prioridad: "media",
   });
 
@@ -32,11 +34,18 @@ const ListaTablero = ({ titulo, tareas, onAddTarea, onDeleteTarea,  dragProps })
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.titulo.trim() || !formData.descripcion.trim()) return;
-    onAddTarea(formData);
+    // Crea una nueva tarea con un ID único
+    const nuevaTarea = {
+      id: crypto.randomUUID(), // ID único para drag-and-drop
+      ...formData,
+      estado: titulo.toLowerCase(),
+    };
+
+    onAddTarea(nuevaTarea);
     setFormData({
       titulo: "",
       descripcion: "",
-      estado: "pendiente",
+      estado: titulo.toLowerCase(),
       prioridad: "media",
     });
     setModalAbierto(false);
@@ -48,22 +57,23 @@ const ListaTablero = ({ titulo, tareas, onAddTarea, onDeleteTarea,  dragProps })
         <h3 className="lista-titulo" {...dragProps}>
           {titulo}
         </h3>
-        <div className="lista-tareas">
-          {tareas.length === 0 ? (
-            <p className="mensaje-vacio">(Sin tareas en esta columna)</p>
-          ) : (
-            tareas.map((tarea, index) => (
-              <TaskCard
-                key={index}
-                titulo={tarea.titulo}
-                descripcion={tarea.descripcion}
-                estado={tarea.estado}
-                prioridad={tarea.prioridad}
-                onDelete={() => onDeleteTarea(index)}
-              />
-            ))
-          )}
-        </div>
+
+      <SortableContext items={tareas.map((t) => t.id)}>
+          <div className="lista-tareas">
+            {tareas.length === 0 ? (
+              <p className="mensaje-vacio">(Sin tareas en esta columna)</p>
+            ) : (
+              tareas.map((tarea, index) => (
+                <DraggableTaskCard
+                  key={tarea.id}
+                  id={tarea.id}
+                  tarea={tarea}
+                  onDelete={() => onDeleteTarea(index)}
+                />
+              ))
+            )}
+          </div>
+        </SortableContext>
 
         {/* Botón para agregar tarea */}
         <button className="agregar-btn" onClick={() => setModalAbierto(true)}>
