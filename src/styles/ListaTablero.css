@@ -27,6 +27,7 @@
   text-align: center;
   border-bottom: 2px solid var(--color-gris-claro);
   padding-bottom: 0.4rem;
+  cursor: pointer;
 }
 
 .lista-tareas {

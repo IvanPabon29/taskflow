@@ -37,7 +37,7 @@
 .kanban-columnas {
   display: flex;
   gap: 1.5rem;
-  padding-bottom: 2rem;
+  padding: 1rem 0rem; 
   overflow: auto;
 }
 
