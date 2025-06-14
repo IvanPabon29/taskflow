@@ -7,13 +7,38 @@
   width: 100%;
   margin: 0 auto;
   color: var(--color-negro);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.8s ease-in-out both;
 }
 
-/* Título principal */
-.mis-tableros h2 {
-  text-align: center;
+/* Animación de entrada como en Home.css */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Título principal con ícono */
+.titulo-mis-tableros {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
   font-size: 2rem;
   margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.icono-titulo {
+  width: 44px;
+  height: 44px;
 }
 
 /* Mensaje cuando no hay tableros */
@@ -21,6 +46,7 @@
   font-size: 1.1rem;
   color: var(--color-gris-medio);
   text-align: center;
+  margin-top: 2rem;
 }
 
 /* Contenedor de tarjetas de tableros */
@@ -28,12 +54,46 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
 }
 
-/* Responsivo */
+
+/* Responsivo para tablets */
 @media (max-width: 768px) {
   .mis-tableros {
-    padding: 1rem;
+    padding: 1.5rem 1rem;
   }
 
+  .titulo-mis-tableros {
+    font-size: 1.7rem;
+    gap: 0.5rem;
+  }
+
+  .icono-titulo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .lista-tableros {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Responsivo para móviles */
+@media (max-width: 480px) {
+  .titulo-mis-tableros {
+    font-size: 1.5rem;
+    gap: 0.4rem;
+  }
+
+  .icono-titulo {
+    width: 34px;
+    height: 34px;
+  }
+
+  .sin-tableros {
+    font-size: 1rem;
+  }
 }

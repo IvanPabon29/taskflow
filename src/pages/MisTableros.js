@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TableroCard from "../components/TableroCard"; 
+import IconMisTableros from "../assets/icons/icon-mis-tableros.png";
 import "../styles/MisTableros.css";
 
 /**
@@ -42,7 +43,10 @@ const MisTableros = () => {
 
   return (
     <main className="mis-tableros">
-      <h2>Mis Tableros</h2>
+      <h2 className="titulo-mis-tableros">
+        <img src={IconMisTableros} alt="Icono Mis Tableros" className="icono-titulo" />
+        Mis Tableros
+      </h2>
       {tableros.length === 0 ? (
         <p className="sin-tableros">Aún no has creado ningún tablero.</p>
       ) : (
