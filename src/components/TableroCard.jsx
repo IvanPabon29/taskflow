@@ -1,5 +1,6 @@
 // src/components/TableroCard.jsx
-import React from "react";
+import IconVerTablero from "../assets/icons/icon-ver-tablero.png";
+import IconEliminarTablero from "../assets/icons/icon-eliminar-tablero.png";
 import "../styles/TableroCard.css";
 
 /**
@@ -7,7 +8,8 @@ import "../styles/TableroCard.css";
  * Se usa, por ejemplo, en la página "MisTableros".
  *
  * @param {Object} props
- * @param {number} props.id - ID único del tablero. * @param {string} props.nombre - Nombre del tablero.
+ * @param {number} props.id - ID único del tablero. 
+ * @param {string} props.nombre - Nombre del tablero.
  * @param {string} props.descripcion - Descripción breve del tablero.
  * @param {string} [props.tipo] - Tipo del tablero (personal, equipo, etc).
  * @param {string} [props.color] - Color de fondo del tablero.
@@ -27,10 +29,12 @@ const TableroCard = ({ id, nombre, descripcion, tipo, color, onVer, onEliminar }
       </div>
 
       <div className="tablero-card-acciones">
-        <button onClick={() => onVer(id)} className="btn-ver">
+        <button onClick={() => onVer(id)} className="btn-ver" title="Ver tablero">
+          <img src={IconVerTablero} alt="Ver" className="btn-icon" />
           Ver
         </button>
-        <button onClick={() => onEliminar(id)} className="btn-eliminar">
+        <button onClick={() => onEliminar(id)} className="btn-eliminar" title="Eliminar tablero">
+          <img src={IconEliminarTablero} alt="Eliminar" className="btn-icon" />
           Eliminar
         </button>
       </div>

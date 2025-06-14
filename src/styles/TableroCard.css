@@ -28,7 +28,6 @@
 
 .tablero-card-descripcion {
   margin: 0.5rem 0;
-  color: var(--color-gris-medio);
   font-size: 0.95rem;
 }
 
@@ -49,17 +48,20 @@
 }
 
 .tablero-card-acciones button {
-  padding: 0.4rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.2rem;
+  width: 150px;
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 1rem;
   transition: background-color 0.2s ease;
 }
 
 /* Botón Ver */
 .btn-ver {
-  width: 6rem;
   background-color: var(--color-verde);
   color: var(--color-blanco);
 }
@@ -76,6 +78,13 @@
 
 .btn-eliminar:hover {
   background-color: #b93c3c;
+}
+
+/* Íconos dentro de botones */
+.btn-icon {
+  width: 20px;
+  height: 18px;
+  margin-right: 6px;
 }
 
 /* Responsivo para tablets */
