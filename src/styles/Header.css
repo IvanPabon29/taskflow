@@ -181,8 +181,8 @@
   gap: 1rem;
 }
 
-.btn-cancel,
-.btn-delete {
+.btn-user-cancel,
+.btn-user-delete {
   padding: 0.6rem 1rem;
   font-weight: 600;
   border-radius: 5px;
@@ -192,23 +192,23 @@
   transition: 0.3s ease-in-out;
 }
 
-.btn-cancel {
+.btn-user-cancel {
   background-color: var(--color-gris-claro);
   color: var(--color-negro);
   border: none;
 }
 
-.btn-delete {
+.btn-user-delete {
   background-color: #e74c3c;
   color: var(--color-blanco);
   border: none;
 }
 
-.btn-delete:hover {
+.btn-user-delete:hover {
   background-color: #c0392b;
 }
 
-.btn-cancel:hover {
+.btn-user-cancel:hover {
   background-color: var(--color-gris-medio);
 }
 
