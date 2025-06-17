@@ -106,10 +106,10 @@ const Header = () => {
             <h2>¿Eliminar cuenta?</h2>
             <p>¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.</p>
             <div className="modal-actions">
-              <button className="btn-cancel" onClick={() => setShowModal(false)}>
+              <button className="btn-user-cancel" onClick={() => setShowModal(false)}>
                 Cancelar
               </button>
-              <button className="btn-delete" onClick={handleDeleteUser}>
+              <button className="btn-user-delete" onClick={handleDeleteUser}>
                 Sí, eliminar
               </button>
             </div>
