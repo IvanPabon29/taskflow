@@ -1,5 +1,7 @@
 // src/pages/MiPerfil.js
 import React, { useState, useEffect } from "react";
+import iconEditarMiPerfil from "../assets/icons/icon-editar-mi-perfil.svg";
+import iconMiPerfil from "../assets/icons/icon-mi-perfil.png";
 import "../styles/MiPerfil.css";
 
 const MiPerfil = () => {
@@ -45,14 +47,22 @@ const MiPerfil = () => {
 
   return (
     <div className="perfil-container">
-      <h1 className="perfil-title">Mi Perfil</h1>
+      {/* Título con ícono */}
+      <h1 className="perfil-title">
+        <img src={iconMiPerfil} alt="Icono perfil" title="Mi Perfil" className="icono-perfil" />
+        Mi Perfil
+      </h1>
 
       <section className="perfil-card">
         <p><strong>Nombre:</strong> {userData.nombre}</p>
         <p><strong>Nombre de Usuario:</strong> {userData.usuario}</p>
         <p><strong>Correo Electrónico:</strong> {userData.correo}</p>
 
-        <button className="edit-btn" onClick={() => setShowModal(true)}>Editar Datos</button>
+        {/* Botón de editar con ícono */}
+        <button className="edit-btn" onClick={() => setShowModal(true)}>
+          <img src={iconEditarMiPerfil} alt="Editar" className="icono-editar" />
+          Editar Datos
+        </button>
       </section>
 
       {/* Modal para edición */}
