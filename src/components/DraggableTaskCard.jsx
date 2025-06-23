@@ -5,8 +5,13 @@ import TaskCard from "./TaskCard";
 
 /**
  * Envuelve una tarjeta de tarea para hacerla arrastrable con @dnd-kit.
+ * @param {Object} props
+ * @param {string} props.id - ID único de la tarjeta (usado por DnD-kit).
+ * @param {Object} props.tarea - Objeto de tarea completo.
+ * @param {Function} props.onDelete - Función para eliminar tarea.
+ * @param {Function} props.onEdit - Función para editar tarea (abre modal).
  */
-const DraggableTaskCard = ({ id, tarea, onDelete }) => {
+const DraggableTaskCard = ({ id, tarea, onDelete, onEdit }) => {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id,
   });
@@ -17,13 +22,12 @@ const DraggableTaskCard = ({ id, tarea, onDelete }) => {
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div ref={setNodeRef} style={style}>
       <TaskCard
-        titulo={tarea.titulo}
-        descripcion={tarea.descripcion}
-        estado={tarea.estado}
-        prioridad={tarea.prioridad}
+        tarea={tarea}
         onDelete={onDelete}
+        onEdit={onEdit}
+        dragHandleProps={{ ...attributes, ...listeners }} // Solo esta parte es arrastrable
       />
     </div>
   );
