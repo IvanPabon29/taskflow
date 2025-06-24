@@ -64,19 +64,34 @@ const Tablero = () => {
   };
 
   // Agrega una nueva tarea a un estado específico
-  const handleAgregarTarea = (nuevaTarea) => {
-    const tareasActualizadas = [...tablero.tareas, nuevaTarea];
-    actualizarTareas(tareasActualizadas);
+  const handleAgregarTarea = (estadoDestino, nuevaTarea) => {
+    if (!nuevaTarea?.id) {
+      nuevaTarea.id = crypto.randomUUID(); // Se asegura que tenga ID aquí únicamente
+    }
+    const tareaConEstado = {
+      ...nuevaTarea,
+      estado: estadoDestino.toLowerCase(), // Asegura que el estado este bien definido
+    };
+    actualizarTareas([...tablero.tareas, tareaConEstado]);
   };
 
   // Elimina una tarea de un estado específico
   const handleEliminarTarea = (estado, index) => {
-    const tareasEstado = tablero.tareas.filter((t) => t.estado === estado);
-    const tareasOtras = tablero.tareas.filter((t) => t.estado !== estado);
-    tareasEstado.splice(index, 1);
-    actualizarTareas([...tareasOtras, ...tareasEstado]);
+    const tareasFiltradas = tablero.tareas.filter((t, i) => {
+      return t.estado !== estado || i !== index;
+    });
+    actualizarTareas(tareasFiltradas);
   };
 
+  // Edita una tarea existente
+  const handleEditarTarea = (tareaEditada) => {
+    const nuevasTareas = tablero.tareas.map((t) =>
+      t.id === tareaEditada.id ? { ...tareaEditada } : t
+    );
+    actualizarTareas(nuevasTareas);
+  };
+
+  // Maneja el final del arrastre de una tarjeta o columna
   const handleDragEnd = (event) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
@@ -98,7 +113,7 @@ const Tablero = () => {
     const nuevaColumna = obtenerEstadoDesdeId(over.id);
     if (!nuevaColumna) return;
 
-    // Cambiar estado y actualizar
+    // Cambia el estado y actualiza
     tareaMovida.estado = nuevaColumna;
     actualizarTareas(tareas);
   };
@@ -150,8 +165,9 @@ const Tablero = () => {
                 <ListaTablero
                   titulo={TITULOS[estado]}
                   tareas={tareasPorEstado[estado]}
-                  onAddTarea={(t) => handleAgregarTarea(estado, t)}
+                  onAddTarea={(tarea) => handleAgregarTarea(estado, tarea)}
                   onDeleteTarea={(index) => handleEliminarTarea(estado, index)}
+                  onEditarTarea={handleEditarTarea}
                 />
               </DraggableColumn>
             ))}
