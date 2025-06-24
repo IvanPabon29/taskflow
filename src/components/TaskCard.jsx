@@ -14,7 +14,7 @@ import "../styles/TaskCard.css";
  * @param {Function} props.onDelete - Función para eliminar la tarea.
  * @param {Function} props.onEditar - Función para actualizar la tarea editada.
  */
-const TaskCard = ({ tarea, onDelete, onEditar }) => {
+const TaskCard = ({ tarea, onDelete, onEditar, dragHandleProps = {} }) => {
   const [modalAbierto, setModalAbierto] = useState(false);
 
   if (!tarea) return null;
@@ -36,7 +36,7 @@ const TaskCard = ({ tarea, onDelete, onEditar }) => {
         </div>
 
         {/* Título */}
-        <div className="task-card-header">
+        <div className="task-card-header" {...dragHandleProps}>
           <h4 className="task-title">{titulo}</h4>
         </div>
 
@@ -63,7 +63,7 @@ const TaskCard = ({ tarea, onDelete, onEditar }) => {
             title="Editar Tarea"
             onClick={abrirModal}
           />
-          
+
           {/* Botón de eliminar tarea */}
           {onDelete && (
             <button className="btn-delete" onClick={onDelete} title="Eliminar tarea">
