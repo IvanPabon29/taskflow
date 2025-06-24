@@ -30,6 +30,12 @@ const ModalNuevaTarea = ({ visible, onClose, onSubmit, formData, handleChange })
             onChange={handleChange}
             required
           />
+          <textarea
+            name="comentarios"
+            placeholder="Comentarios"
+            value={formData.comentarios}
+            onChange={handleChange}
+          />
           <select name="estado" value={formData.estado} onChange={handleChange}>
             <option value="pendiente">Pendiente</option>
             <option value="en-progreso">En progreso</option>
