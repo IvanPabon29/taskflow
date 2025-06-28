@@ -15,9 +15,9 @@ const ModalEditarTarea = ({ visible, onClose, onGuardar, tarea }) => {
   const [formData, setFormData] = useState({
     titulo: "",
     descripcion: "",
+    comentarios: "",
     estado: "pendiente",
     prioridad: "media",
-    comentarios: ""
   });
 
   // Inicializa el formulario con los datos actuales de la tarea
@@ -26,9 +26,9 @@ const ModalEditarTarea = ({ visible, onClose, onGuardar, tarea }) => {
       setFormData({
         titulo: tarea.titulo || "",
         descripcion: tarea.descripcion || "",
+        comentarios: tarea.comentarios || "",
         estado: tarea.estado || "pendiente",
         prioridad: tarea.prioridad || "media",
-        comentarios: tarea.comentarios || ""
       });
     }
   }, [tarea]);
@@ -54,8 +54,9 @@ const ModalEditarTarea = ({ visible, onClose, onGuardar, tarea }) => {
       <div className="modal-editar">
         <h2>Editar Tarea</h2>
         <form onSubmit={handleSubmit} className="form-editar-tarea">
-          <label>Título</label>
+          <label htmlFor="titulo">Título</label>
           <input
+            id="titulo"
             type="text"
             name="titulo"
             value={formData.titulo}
@@ -63,24 +64,27 @@ const ModalEditarTarea = ({ visible, onClose, onGuardar, tarea }) => {
             required
           />
 
-          <label>Descripción</label>
+          <label htmlFor="descripcion">Descripción</label>
           <textarea
+            id="descripcion"
             name="descripcion"
             value={formData.descripcion}
             onChange={handleChange}
             rows={3}
           />
 
-          <label>Comentarios</label>
+          <label htmlFor="comentarios">Comentarios</label>
           <textarea
+            id="comentarios"
             name="comentarios"
             value={formData.comentarios}
             onChange={handleChange}
             rows={3}
           />
 
-          <label>Estado</label>
+          <label htmlFor="estado">Estado</label>
           <select
+            id="estado"
             name="estado"
             value={formData.estado}
             onChange={handleChange}
@@ -91,8 +95,9 @@ const ModalEditarTarea = ({ visible, onClose, onGuardar, tarea }) => {
             <option value="notas">Notas y Referencias</option>
           </select>
 
-          <label>Prioridad</label>
+          <label htmlFor="prioridad">Prioridad</label>
           <select
+            id="prioridad"
             name="prioridad"
             value={formData.prioridad}
             onChange={handleChange}
