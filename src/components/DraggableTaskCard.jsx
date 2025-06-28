@@ -11,7 +11,7 @@ import TaskCard from "./TaskCard";
  * @param {Function} props.onDelete - Función para eliminar tarea.
  * @param {Function} props.onEdit - Función para editar tarea (abre modal).
  */
-const DraggableTaskCard = ({ id, tarea, onDelete, onEdit }) => {
+const DraggableTaskCard = ({ id, tarea, onDelete, onEditar }) => {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
     id,
   });
@@ -26,7 +26,7 @@ const DraggableTaskCard = ({ id, tarea, onDelete, onEdit }) => {
       <TaskCard
         tarea={tarea}
         onDelete={onDelete}
-        onEdit={onEdit}
+        onEditar={onEditar}
         dragHandleProps={{ ...attributes, ...listeners }} // Solo esta parte es arrastrable
       />
     </div>
