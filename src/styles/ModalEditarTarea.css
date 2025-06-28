@@ -1,0 +1,154 @@
+/* Fondo del modal */
+.modal-editar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30, 30, 30, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 110;
+}
+
+/* Contenedor del modal */
+.modal-editar {
+  background-color: var(--color-blanco);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 530px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease;
+}
+
+/* Título */
+.modal-editar h2 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  text-align: center;
+  color: var(--color-negro);
+}
+
+/* Formulario */
+.form-editar-tarea {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.form-editar-tarea label {
+  font-weight: 600;
+  color: var(--color-negro);
+}
+
+.form-editar-tarea input,
+.form-editar-tarea select,
+.form-editar-tarea textarea {
+  padding: 0.6rem;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+  resize: none;
+}
+
+/* Botones */
+.modal-editar-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.modal-editar-buttons button {
+  flex: 1;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.modal-editar-buttons .guardar-btn {
+  background-color: #047a20;
+  color: var(--color-blanco);
+}
+
+.modal-editar-buttons .guardar-btn:hover {
+  background-color: #035317;
+}
+
+.modal-editar-buttons .cancelar-btn {
+  background-color: #ccc;
+  color: black;
+}
+
+.modal-editar-buttons .cancelar-btn:hover {
+  background-color: #aaa;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsivo para tablets */
+@media (max-width: 768px) {
+  .modal-editar {
+    padding: 1.2rem;
+    width: 85%;
+  }
+
+  .modal-editar h2 {
+    font-size: 1.25rem;
+  }
+
+  .form-editar-tarea input,
+  .form-editar-tarea textarea,
+  .form-editar-tarea select {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  .modal-editar-buttons {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .modal-editar-buttons button {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsivo para móviles */
+@media (max-width: 480px) {
+  .modal-editar {
+    padding: 1rem;
+  }
+
+  .modal-editar h2 {
+    font-size: 1.2rem;
+  }
+
+  .form-editar-tarea input,
+  .form-editar-tarea textarea,
+  .form-editar-tarea select {
+    font-size: 0.85rem;
+  }
+
+  .modal-editar-buttons button {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+}
