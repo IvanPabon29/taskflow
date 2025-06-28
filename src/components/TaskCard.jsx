@@ -1,9 +1,7 @@
 // src/components/TaskCard.jsx
-import React, { useState } from "react";
 import iconDescripcion from "../assets/icons/icon-descripcion-tarjeta.png";
 import iconComentarios from "../assets/icons/icon-comentarios-tarea.png";
 import iconEditarTarjeta from "../assets/icons/icon-editar-tarjeta.png";
-import ModalEditarTarea from "./ModalEditarTarea";
 import "../styles/TaskCard.css";
 
 /**
@@ -15,16 +13,10 @@ import "../styles/TaskCard.css";
  * @param {Function} props.onEditar - Función para actualizar la tarea editada.
  */
 const TaskCard = ({ tarea, onDelete, onEditar, dragHandleProps = {} }) => {
-  const [modalAbierto, setModalAbierto] = useState(false);
-
   if (!tarea) return null;
 
+  // Desestructuración de los datos de la tarea
   const { titulo, estado, prioridad } = tarea;
-
-  // Función para abrir el modal de edición
-  const abrirModal = () => {
-    setModalAbierto(true);
-  };
 
   return (
     <>
@@ -47,21 +39,21 @@ const TaskCard = ({ tarea, onDelete, onEditar, dragHandleProps = {} }) => {
             alt="Descripción"
             className="task-icon"
             title="Ver/Editar Descripción"
-            onClick={abrirModal}
+            onClick={onEditar}
           />
           <img
             src={iconComentarios}
             alt="Comentarios"
             className="task-icon"
             title="Ver/Agregar Comentarios"
-            onClick={abrirModal}
+            onClick={onEditar}
           />
           <img
             src={iconEditarTarjeta}
             alt="Editar"
             className="task-icon"
             title="Editar Tarea"
-            onClick={abrirModal}
+            onClick={onEditar}
           />
 
           {/* Botón de eliminar tarea */}
@@ -72,15 +64,6 @@ const TaskCard = ({ tarea, onDelete, onEditar, dragHandleProps = {} }) => {
           )}
         </div>
       </article>
-
-      {/* Modal para edición de la tarea */}
-      {modalAbierto && (
-        <ModalEditarTarea
-          tarea={tarea}
-          onClose={() => setModalAbierto(false)}
-          onGuardar={onEditar}
-        />
-      )}
     </>
   );
 };
