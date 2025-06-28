@@ -1,6 +1,7 @@
 // src/components/ListaTablero.jsx
 import React, { useState } from "react";
 import ModalNuevaTarea from "./ModalNuevaTarea";
+import ModalEditarTarea from "./ModalEditarTarea";
 import DraggableTaskCard from "./DraggableTaskCard";
 import { SortableContext } from "@dnd-kit/sortable"; 
 import "../styles/ListaTablero.css";
@@ -18,6 +19,8 @@ import "../styles/ListaTablero.css";
 
 const ListaTablero = ({ titulo, tareas, onAddTarea, onDeleteTarea, onEditarTarea,dragProps }) => {
   const [modalAbierto, setModalAbierto] = useState(false);
+  const [modalEditarAbierto, setModalEditarAbierto] = useState(false);
+  const [tareaEditando, setTareaEditando] = useState(null);
 
   const [formData, setFormData] = useState({
     titulo: "",
@@ -26,6 +29,12 @@ const ListaTablero = ({ titulo, tareas, onAddTarea, onDeleteTarea, onEditarTarea
     estado: titulo.toLowerCase(), // Usa el título como estado inicial
     prioridad: "media",
   });
+
+  // Abre el modal de edición con la tarea seleccionada
+  const abrirModalEdicion = (tarea) => {
+    setTareaEditando(tarea);
+    setModalEditarAbierto(true);
+  };
 
   // Maneja el cambio de los campos del formulario
   const handleChange = (e) => {
@@ -76,7 +85,7 @@ const ListaTablero = ({ titulo, tareas, onAddTarea, onDeleteTarea, onEditarTarea
                   id={tarea.id}
                   tarea={tarea}
                   onDelete={() => onDeleteTarea(index)}
-                  onEdit={onEditarTarea}
+                  onEditar={() => abrirModalEdicion(tarea)}
                 />
               ))
             )}
@@ -89,7 +98,7 @@ const ListaTablero = ({ titulo, tareas, onAddTarea, onDeleteTarea, onEditarTarea
         </button>
       </div>
 
-      {/* Modal NUEVO – ahora es global */}
+      {/* Modal de creacion – ahora es global */}
       <ModalNuevaTarea
         visible={modalAbierto}
         onClose={() => setModalAbierto(false)}
@@ -97,6 +106,24 @@ const ListaTablero = ({ titulo, tareas, onAddTarea, onDeleteTarea, onEditarTarea
         formData={formData}
         handleChange={handleChange}
       />
+
+      {/* Modal de edicion – ahora es global */}
+      {/* Renderiza el modal de edición solo si hay tarea seleccionada */}
+      {tareaEditando && (
+        <ModalEditarTarea
+          visible={modalEditarAbierto}
+          tarea={tareaEditando}
+          onClose={() => {
+            setModalEditarAbierto(false);
+            setTareaEditando(null);
+          }}
+          onGuardar={(tareaEditada) => {
+            onEditarTarea(tareaEditada);
+            setModalEditarAbierto(false);
+            setTareaEditando(null);
+          }}
+        />
+      )}
     </>
   );
 };
