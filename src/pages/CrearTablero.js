@@ -1,4 +1,4 @@
-// src/pages/CrearTablero.jsx
+// src/pages/CrearTablero.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/CrearTablero.css";
@@ -29,12 +29,30 @@ const CrearTablero = () => {
     e.preventDefault();
 
     const nuevosTableros = JSON.parse(localStorage.getItem("tableros")) || [];
+
+    // Procesar tareas iniciales separadas por comas
+    const tareas = formData.tareasIniciales
+      .split(",")
+      .map((t) => t.trim())
+      .filter((t) => t.length > 0)
+      .map((titulo) => ({
+        id: crypto.randomUUID(),
+        titulo,
+        descripcion: "",
+        comentarios: "",
+        estado: "pendiente",
+        prioridad: "media",
+      }));
+
     const nuevoTablero = {
       id: Date.now(),
-      ...formData,
-      tareas: [], // Por ahora se ignoran las tareasIniciales
+      nombre: formData.nombre,
+      descripcion: formData.descripcion,
+      color: formData.color,
+      tipo: formData.tipo,
+      tareas,
     };
-
+    
     nuevosTableros.push(nuevoTablero);
     localStorage.setItem("tableros", JSON.stringify(nuevosTableros));
 
