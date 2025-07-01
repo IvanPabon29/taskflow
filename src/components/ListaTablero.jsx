@@ -84,7 +84,12 @@ const ListaTablero = ({ titulo, tareas, onAddTarea, onDeleteTarea, onEditarTarea
                   key={tarea.id}
                   id={tarea.id}
                   tarea={tarea}
-                  onDelete={() => onDeleteTarea(index)}
+                  onDelete={() => {
+                    const confirmar = window.confirm("¿Estás seguro de que deseas eliminar esta tarea?");
+                    if (confirmar) {
+                      onDeleteTarea(index);
+                    }
+                  }}
                   onEditar={() => abrirModalEdicion(tarea)}
                 />
               ))
