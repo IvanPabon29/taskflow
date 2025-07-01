@@ -17,7 +17,9 @@
   background-color: var(--color-blanco);
   border-radius: 12px;
   padding: 2rem;
+  height: 90%;
   width: 90%;
+  overflow: auto;
   max-width: 530px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   animation: fadeIn 0.3s ease;
