@@ -35,7 +35,7 @@ const Header = () => {
 
   // Elimina los datos del usuario y redirige
   const handleDeleteUser = () => {
-    localStorage.removeItem("userData");
+    localStorage.clear();
     setShowModal(false);
     navigate("/");
   };
