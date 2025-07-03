@@ -20,21 +20,21 @@ const Home = () => {
 
       <div className="home-options">
         {/* Opción: Crear nuevo tablero */}
-        <Link to="/listas-tareas/crear-tablero" className="home-card">
+        <Link to="/crear-tablero" className="home-card">
           <img src={iconAgregar} alt="Crear nuevo tablero" className="home-icon" />
           <h3>Nuevo Tablero</h3>
           <p>Crea un tablero para organizar tus tareas y proyectos.</p>
         </Link>
 
         {/* Opción: Ver mis tableros */}
-        <Link to="/listas-tareas/mis-tableros" className="home-card">
+        <Link to="/mis-tableros" className="home-card">
           <img src={iconCarpeta} alt="Mis tableros" className="home-icon" />
           <h3>Mis Tableros</h3>
           <p>Accede, edita o elimina tus tableros existentes.</p>
         </Link>
 
         {/* Opción: Ver estadísticas */}
-        <Link to="/listas-tareas/estadisticas" className="home-card">
+        <Link to="/estadisticas" className="home-card">
           <img src={iconEstadisticas} alt="Estadísticas" className="home-icon" />
           <h3>Estadísticas</h3>
           <p>Consulta tus avances, tareas completadas, tiempo invertido y más.</p>

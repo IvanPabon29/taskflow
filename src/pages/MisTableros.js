@@ -25,7 +25,7 @@ const MisTableros = () => {
    * @param {number} id - ID del tablero a mostrar.
    */
   const manejarVer = (id) => {
-    navigate(`/listas-tareas/tablero/${id}`);
+    navigate(`/tablero/${id}`);
   };
 
   /**

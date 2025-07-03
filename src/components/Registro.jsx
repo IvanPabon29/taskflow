@@ -29,7 +29,7 @@ const Registro = () => {
     // Guardamos los datos del usuario en localStorage
     setUserData(formData);
     // Redirigimos al usuario al Home después de registrarse
-    navigate("/listas-tareas/home");
+    navigate("/home");
   };
 
   return (

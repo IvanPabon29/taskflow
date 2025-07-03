@@ -13,13 +13,13 @@ const Footer = () => {
       <div className="footer-container">
         <ul className="footer-links">
           <li>
-            <Link to="/listas-tareas/politicas-privacidad">Políticas de Privacidad</Link>
+            <Link to="/politicas-privacidad">Políticas de Privacidad</Link>
           </li>
           <li>
-            <Link to="/listas-tareas/terminos-condiciones">Términos y Condiciones</Link>
+            <Link to="/terminos-condiciones">Términos y Condiciones</Link>
           </li>
           <li>
-            <Link to="/listas-tareas/contacto">Contacto</Link>
+            <Link to="/contacto">Contacto</Link>
           </li>
         </ul>
         <p>

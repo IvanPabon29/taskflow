@@ -37,14 +37,14 @@ const Header = () => {
   const handleDeleteUser = () => {
     localStorage.removeItem("userData");
     setShowModal(false);
-    navigate("/listas-tareas");
+    navigate("/");
   };
 
   return (
     <header className="header">
       <div className="header-container">
         <div className="header-logo">
-          <Link to="/listas-tareas/home" title="Home">
+          <Link to="/home" title="Home">
             <img
               src={Logo}
               alt="TaskFlow Logo"
@@ -72,13 +72,13 @@ const Header = () => {
               <div className="dropdown-menu">
                 <ul>
                   <li>
-                    <Link to="/listas-tareas/mi-perfil">
+                    <Link to="/mi-perfil">
                       <img src={IconMiPerfil} alt="Mi perfil" />
                       Mi Perfil
                     </Link>
                   </li>
                   <li>
-                    <Link to="/listas-tareas/acerca-de">
+                    <Link to="/acerca-de">
                       <img src={IconAcercaDe} alt="Acerca de" />
                       Acerca de
                     </Link>

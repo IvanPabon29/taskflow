@@ -47,7 +47,7 @@ const Tablero = () => {
 
     if (!encontrado) {
       // Si no se encuentra el tablero, redirige a 404 o home
-      navigate("/listas-tareas/home");
+      navigate("/home");
     } else {
       setTablero(encontrado);
     }

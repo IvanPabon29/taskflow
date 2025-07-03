@@ -1,3 +1,4 @@
+// src/App.js
 import "./App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Registro from "./components/Registro";
@@ -15,36 +16,52 @@ import TerminosCondiciones from "./pages/TerminosCondiciones";
 import Contacto from "./pages/Contacto";
 import NotFound from "./pages/NotFound";
 
-
 function App() {
+  // Verifica si ya hay un usuario registrado
+  const usuarioRegistrado = JSON.parse(localStorage.getItem("userData"));
+
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename="/listas-tareas">
         <Routes>
-          {/* Ruta publica de registro, sin Header ni Footer */}
-          <Route path="/listas-tareas" element={<Registro />} />
 
-          {/* Rutas protegidas o privadas que utilizan el Layout con Header y Footer */} 
-          <Route path="/listas-tareas" element={<RequireAuth><Layout /></RequireAuth>}>
+          {/* Ruta raíz dinámica: Redirige a home si hay usuario, o muestra Registro si no */}
+          <Route
+            path="/"
+            element={
+              usuarioRegistrado ? (
+                <Navigate to="/home" replace />
+              ) : (
+                <Registro />
+              )
+            }
+          />
+
+          {/* Rutas protegidas que usan Layout (Header + Footer) */}
+          <Route
+            path="/"
+            element={
+              <RequireAuth>
+                <Layout />
+              </RequireAuth>
+            }
+          >
             <Route path="home" element={<Home />} />
             <Route path="crear-tablero" element={<CrearTablero />} />
             <Route path="tablero/:id" element={<Tablero />} />
-            
             <Route path="mis-tableros" element={<MisTableros />} />
             <Route path="estadisticas" element={<Estadisticas />} />
             <Route path="estadisticas/:id" element={<Estadisticas />} />
             <Route path="mi-perfil" element={<MiPerfil />} />
             <Route path="acerca-de" element={<About />} />
             <Route path="politicas-privacidad" element={<PoliticasPrivacidad />} />
-            <Route path="terminos-condiciones" element={<TerminosCondiciones/>} />
+            <Route path="terminos-condiciones" element={<TerminosCondiciones />} />
             <Route path="contacto" element={<Contacto />} />
-            
-            {/* Ruta para manejar páginas no encontradas 404 dentro del Layout */}
             <Route path="*" element={<NotFound />} />
           </Route>
 
-          {/* Ruta catch-all para redirigir a Registro si se accede a una URL no válida */}
-          <Route path="*" element={<Navigate to="/listas-tareas" replace />} />
+          {/* Ruta catch-all final para redireccionar cualquier otra ruta inválida */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </div>
