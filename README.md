@@ -15,10 +15,10 @@
 
 ## 📸 Interfaz
 ### Login:
-<img width="1365" height="598" alt="Captura de pantalla 2025-07-21 204405" src="https://github.com/user-attachments/assets/24bd62dc-51ab-4092-8a96-218928de07d9" />
+![Captura de pantalla 2025-07-21 204405](https://github.com/user-attachments/assets/24bd62dc-51ab-4092-8a96-218928de07d9)
 
 ### Home:
-<img width="1349" height="596" alt="Captura de pantalla 2025-07-21 204339" src="https://github.com/user-attachments/assets/d8dc7ee1-da18-4663-ac6e-098e8ad5c37c" />
+![Captura de pantalla 2025-07-21 204339](https://github.com/user-attachments/assets/d8dc7ee1-da18-4663-ac6e-098e8ad5c37c)
 
 ## 🛠 Tecnologías utilizadas
 - ⚛️ React (Create React App)
