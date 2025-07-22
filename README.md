@@ -1,27 +1,50 @@
-#  Lista de Tareas en React.
+# 🧩 TaskFlow – App de Gestión de Tableros y Tareas
 
-## Descripción
-Aplicación web simple creada con React para gestionar listas de tareas. Permite agregar, eliminar y marcar tareas como completadas.
+**TaskFlow** es una aplicación web interactiva desarrollada con React que permite a los usuarios gestionar proyectos y tareas de forma visual, intuitiva y organizada, al estilo Trello. Puedes crear tableros personalizados, agregar tareas, moverlas entre columnas y editarlas fácilmente desde cualquier dispositivo.
 
-## Interfaz
-![Captura de pantalla 2024-07-26 195151](https://github.com/user-attachments/assets/4c262c80-9e6c-49b6-8679-bb6d152dfb3b)
+## 🚀 Características principales
+✅ Crear tableros personalizados con color, tipo y descripción  
+✅ Crear tareas con título, descripción, prioridad, estado y comentarios  
+✅ Arrastrar y soltar columnas y tareas (drag & drop)  
+✅ Editar tareas desde un modal intuitivo  
+✅ Eliminar tareas con confirmación  
+✅ Estadísticas generales del progreso del tablero  
+✅ Responsive y optimizado para móviles  
+✅ Guardado automático en `localStorage`  
+✅ Interfaz moderna, clara y agradable
 
-## Características
-* Agregar tareas: Ingresa nuevas tareas a través de un Input o formulario.
-* Eliminar tareas: Elimina tareas individuales de la lista.
-* Marcar como completadas: Marca tareas como completadas para un mejor seguimiento.
-* Diseño: Un diseño web simple y minimalista.
+## 📸 Interfaz
+### Login:
+<img width="1365" height="598" alt="Captura de pantalla 2025-07-21 204405" src="https://github.com/user-attachments/assets/24bd62dc-51ab-4092-8a96-218928de07d9" />
 
-## Instalación
+### Home:
+<img width="1349" height="596" alt="Captura de pantalla 2025-07-21 204339" src="https://github.com/user-attachments/assets/d8dc7ee1-da18-4663-ac6e-098e8ad5c37c" />
+
+## 🛠 Tecnologías utilizadas
+- ⚛️ React (Create React App)
+- 📦 React Router DOM
+- 🎯 @dnd-kit para drag & drop
+- 💅 CSS personalizado (Responsive + Animaciones)
+- 🗄️ localStorage para persistencia
+- 🔒 Sistema básico de autenticación de usuario
+
+## 📦 Instalación local
 1. Clona el repositorio: `git clone https://github.com/IvanPabon29/listas-tareas.git`
 2. Instala las dependencias: `npm install`
 3. Inicia la aplicación: `npm start`
 
-## Tecnologías utilizadas
-* JavaScript
-* React
-* Html
-* Css
+## 🌐 Deploy en GitHub Pages
+Puedes acceder a la app en línea aquí:
+👉 https://IvanPabon29.github.io/listas-tareas
 
-## Contribuciones
-Las contribuciones son bienvenidas. Por favor, abre un issue para discutir nuevas características o mejoras.
+## 👨‍💻 Contribuciones
+Las contribuciones son bienvenidas. Puedes:
+* Abrir un issue con mejoras o errores
+* Hacer un fork y proponer un Pull Request
+* Reportar bugs o sugerencias
+
+## 📄 Licencia
+Este proyecto está bajo la licencia MIT.
+
+## ✨ Autor
+Desarrollado por Iván Pabón – @IvanPabon29
