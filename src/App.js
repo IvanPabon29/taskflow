@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter basename="/listas-tareas">
+      <BrowserRouter basename="/taskflow">
         <Routes>
 
           {/* Ruta raíz dinámica: Redirige a home si hay usuario, o muestra Registro si no */}
